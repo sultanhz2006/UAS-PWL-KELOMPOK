@@ -45,6 +45,64 @@ CREATE TABLE `bookings` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hotel_bookings`
+--
+
+CREATE TABLE `hotel_bookings` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `kode_hotel_booking` varchar(24) NOT NULL,
+  `booking_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `hotel_id` int(10) UNSIGNED NOT NULL,
+  `check_in` date NOT NULL,
+  `check_out` date NOT NULL,
+  `jumlah_kamar` tinyint(3) UNSIGNED DEFAULT 1,
+  `jumlah_tamu` tinyint(3) UNSIGNED DEFAULT 1,
+  `total_harga` decimal(14,2) NOT NULL,
+  `status` enum('pending','dikonfirmasi','dibatalkan') DEFAULT 'pending',
+  `catatan` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hotels`
+--
+
+CREATE TABLE `hotels` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nama_hotel` varchar(150) NOT NULL,
+  `destinasi` varchar(150) NOT NULL,
+  `harga_per_malam` decimal(12,2) NOT NULL,
+  `bintang` tinyint(3) UNSIGNED DEFAULT 3,
+  `alamat` varchar(255) NOT NULL,
+  `deskripsi` text DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `status` enum('aktif','nonaktif') DEFAULT 'aktif',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hotels`
+--
+
+INSERT INTO `hotels` (`id`, `nama_hotel`, `destinasi`, `harga_per_malam`, `bintang`, `alamat`, `deskripsi`, `foto`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Bali Garden Resort', 'Bali, Indonesia', 850000.00, 4, 'Kuta, Bali', 'Resort keluarga dekat pantai dan pusat kuliner Kuta.', NULL, 'aktif', '2026-07-01 12:00:00', '2026-07-01 12:00:00'),
+(2, 'Raja Ampat Dive Lodge', 'Raja Ampat, Papua', 1400000.00, 4, 'Waisai, Raja Ampat', 'Penginapan tepi laut untuk wisata snorkeling dan diving.', NULL, 'aktif', '2026-07-01 12:00:00', '2026-07-01 12:00:00'),
+(3, 'Jogja Heritage Inn', 'Yogyakarta, Indonesia', 520000.00, 3, 'Malioboro, Yogyakarta', 'Hotel nyaman dekat Malioboro, Keraton, dan stasiun.', NULL, 'aktif', '2026-07-01 12:00:00', '2026-07-01 12:00:00'),
+(4, 'Komodo Harbor Hotel', 'Labuan Bajo, NTT', 950000.00, 4, 'Labuan Bajo, NTT', 'Hotel strategis dekat pelabuhan dan titik keberangkatan island hopping.', NULL, 'aktif', '2026-07-01 12:00:00', '2026-07-01 12:00:00'),
+(5, 'Mandalika Bay Hotel', 'Lombok, Indonesia', 780000.00, 4, 'Mandalika, Lombok', 'Hotel modern dekat Pantai Kuta Mandalika dan Bukit Merese.', NULL, 'aktif', '2026-07-01 12:00:00', '2026-07-01 12:00:00'),
+(6, 'Bromo View Guesthouse', 'Malang, Jawa Timur', 430000.00, 3, 'Tumpang, Malang', 'Guesthouse sederhana untuk persiapan trip sunrise Bromo.', NULL, 'aktif', '2026-07-01 12:00:00', '2026-07-01 12:00:00'),
+(7, 'Lembang Family Stay', 'Bandung, Jawa Barat', 620000.00, 3, 'Lembang, Bandung', 'Penginapan keluarga dengan akses mudah ke wisata Lembang.', NULL, 'aktif', '2026-07-01 12:00:00', '2026-07-01 12:00:00'),
+(8, 'Toba Lake Hotel', 'Medan, Sumatera Utara', 720000.00, 4, 'Parapat, Sumatera Utara', 'Hotel dengan akses perjalanan menuju Danau Toba dan Samosir.', NULL, 'aktif', '2026-07-01 12:00:00', '2026-07-01 12:00:00'),
+(9, 'Losari Sea View Hotel', 'Makassar, Sulawesi Selatan', 690000.00, 4, 'Pantai Losari, Makassar', 'Hotel kota dekat Pantai Losari dan pusat kuliner Makassar.', NULL, 'aktif', '2026-07-01 12:00:00', '2026-07-01 12:00:00'),
+(10, 'Belitung Island Hotel', 'Belitung, Indonesia', 650000.00, 3, 'Tanjung Pandan, Belitung', 'Hotel nyaman untuk island hopping dan wisata pantai granit.', NULL, 'aktif', '2026-07-01 12:00:00', '2026-07-01 12:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `paket_wisata`
 --
 
@@ -118,6 +176,22 @@ ALTER TABLE `bookings`
   ADD KEY `paket_id` (`paket_id`);
 
 --
+-- Indexes for table `hotel_bookings`
+--
+ALTER TABLE `hotel_bookings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `kode_hotel_booking` (`kode_hotel_booking`),
+  ADD KEY `booking_id` (`booking_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `hotel_id` (`hotel_id`);
+
+--
+-- Indexes for table `hotels`
+--
+ALTER TABLE `hotels`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `paket_wisata`
 --
 ALTER TABLE `paket_wisata`
@@ -141,6 +215,18 @@ ALTER TABLE `bookings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `hotel_bookings`
+--
+ALTER TABLE `hotel_bookings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hotels`
+--
+ALTER TABLE `hotels`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `paket_wisata`
 --
 ALTER TABLE `paket_wisata`
@@ -162,6 +248,14 @@ ALTER TABLE `users`
 ALTER TABLE `bookings`
   ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`paket_id`) REFERENCES `paket_wisata` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `hotel_bookings`
+--
+ALTER TABLE `hotel_bookings`
+  ADD CONSTRAINT `hotel_bookings_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hotel_bookings_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `hotel_bookings_ibfk_3` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

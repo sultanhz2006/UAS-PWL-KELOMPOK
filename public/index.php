@@ -56,6 +56,8 @@ $router->get('/pelanggan/paket',                ['PelangganController', 'paketLi
 $router->get('/pelanggan/paket/:id',            ['PelangganController', 'paketDetail']);
 $router->post('/pelanggan/booking/store',       ['PelangganController', 'bookingStore']);
 $router->get('/pelanggan/booking',              ['PelangganController', 'bookingList']);
+$router->get('/pelanggan/booking/:id/hotel',    ['PelangganController', 'hotelOptions']);
+$router->post('/pelanggan/hotel-booking/store', ['PelangganController', 'hotelBookingStore']);
 $router->get('/pelanggan/booking/:id/download', ['PelangganController', 'downloadTiket']);
 
 // ---- Dispatch ----

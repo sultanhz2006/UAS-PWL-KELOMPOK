@@ -29,6 +29,7 @@
                     <th style="font-weight:600;color:#64748B">Peserta</th>
                     <th style="font-weight:600;color:#64748B">Total</th>
                     <th style="font-weight:600;color:#64748B">Status</th>
+                    <th style="font-weight:600;color:#64748B">Hotel</th>
                     <th style="font-weight:600;color:#64748B">Tiket</th>
                 </tr>
             </thead>
@@ -62,6 +63,14 @@
                     <span class="badge bg-<?= $sc ?>-subtle text-<?= $sc ?> rounded-pill px-2" style="font-size:.75rem">
                         <i class="<?= $icon ?> me-1"></i><?= $label ?>
                     </span>
+                </td>
+                <td>
+                    <a href="<?= BASE_URL ?>/pelanggan/booking/<?= $b['id'] ?>/hotel"
+                       class="btn btn-sm btn-outline-success rounded-2"
+                       title="Pilih penginapan"
+                       style="font-size:.75rem">
+                        <i class="bi bi-building me-1"></i>Hotel
+                    </a>
                 </td>
                 <td>
                     <a href="<?= BASE_URL ?>/pelanggan/booking/<?= $b['id'] ?>/download"

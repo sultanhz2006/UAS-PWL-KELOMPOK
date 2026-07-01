@@ -4,16 +4,22 @@
 require_once APP_PATH . '/Core/BaseController.php';
 require_once APP_PATH . '/Models/PaketWisataModel.php';
 require_once APP_PATH . '/Models/BookingModel.php';
+require_once APP_PATH . '/Models/HotelModel.php';
+require_once APP_PATH . '/Models/HotelBookingModel.php';
 require_once APP_PATH . '/Middleware/AuthMiddleware.php';
 
 class PelangganController extends BaseController {
     private PaketWisataModel $paketModel;
     private BookingModel     $bookingModel;
+    private HotelModel       $hotelModel;
+    private HotelBookingModel $hotelBookingModel;
 
     public function __construct() {
         AuthMiddleware::requireRole('pelanggan');
-        $this->paketModel   = new PaketWisataModel();
-        $this->bookingModel = new BookingModel();
+        $this->paketModel        = new PaketWisataModel();
+        $this->bookingModel      = new BookingModel();
+        $this->hotelModel        = new HotelModel();
+        $this->hotelBookingModel = new HotelBookingModel();
     }
 
     // GET /pelanggan/dashboard
@@ -94,12 +100,84 @@ class PelangganController extends BaseController {
         if ($bookingId) {
             // Generate PDF tiket otomatis
             $this->generatePdfTiket($bookingId);
-            $this->flash('success', "Booking berhasil! Kode: <strong>{$kodeBooking}</strong>. Silakan tunggu konfirmasi admin.");
-            $this->redirect('/pelanggan/booking');
+            $this->flash('success', "Booking berhasil! Kode: <strong>{$kodeBooking}</strong>. Kamu bisa lanjut pilih penginapan.");
+            $this->redirect('/pelanggan/booking/' . $bookingId . '/hotel');
         } else {
             $this->flash('danger', 'Booking gagal. Silakan coba lagi.');
             $this->redirect('/pelanggan/paket/' . $paketId);
         }
+    }
+
+    // GET /pelanggan/booking/:id/hotel
+    public function hotelOptions(string $id): void {
+        $booking = $this->bookingModel->findById((int) $id);
+        if (!$booking || (int) $booking['user_id'] !== (int) $_SESSION['user_id']) {
+            $this->flash('danger', 'Akses booking tidak valid.');
+            $this->redirect('/pelanggan/booking');
+        }
+
+        $hotelBooking = $this->hotelBookingModel->getByBooking((int) $id, (int) $_SESSION['user_id']);
+        $hotels = $this->hotelModel->getByDestinasi($booking['destinasi']);
+
+        $this->view('pelanggan/hotel_options', [
+            'title'        => 'Pilih Penginapan',
+            'booking'      => $booking,
+            'hotelBooking' => $hotelBooking,
+            'hotels'       => $hotels,
+        ]);
+    }
+
+    // POST /pelanggan/hotel-booking/store
+    public function hotelBookingStore(): void {
+        $bookingId   = (int) ($_POST['booking_id'] ?? 0);
+        $hotelId     = (int) ($_POST['hotel_id'] ?? 0);
+        $checkIn     = trim($_POST['check_in'] ?? '');
+        $checkOut    = trim($_POST['check_out'] ?? '');
+        $jumlahKamar = (int) ($_POST['jumlah_kamar'] ?? 1);
+        $jumlahTamu  = (int) ($_POST['jumlah_tamu'] ?? 1);
+        $catatan     = trim($_POST['catatan'] ?? '');
+
+        $booking = $this->bookingModel->findById($bookingId);
+        $hotel   = $this->hotelModel->findById($hotelId);
+
+        if (!$booking || (int) $booking['user_id'] !== (int) $_SESSION['user_id'] || !$hotel) {
+            $this->flash('danger', 'Data booking atau hotel tidak valid.');
+            $this->redirect('/pelanggan/booking');
+        }
+
+        if ($this->hotelBookingModel->getByBooking($bookingId, (int) $_SESSION['user_id'])) {
+            $this->flash('info', 'Booking hotel untuk perjalanan ini sudah ada.');
+            $this->redirect('/pelanggan/booking/' . $bookingId . '/hotel');
+        }
+
+        if (empty($checkIn) || empty($checkOut) || strtotime($checkIn) < strtotime('today') || strtotime($checkOut) <= strtotime($checkIn)) {
+            $this->flash('danger', 'Tanggal check-in dan check-out tidak valid.');
+            $this->redirect('/pelanggan/booking/' . $bookingId . '/hotel');
+        }
+
+        if ($jumlahKamar < 1 || $jumlahTamu < 1) {
+            $this->flash('danger', 'Jumlah kamar dan tamu minimal 1.');
+            $this->redirect('/pelanggan/booking/' . $bookingId . '/hotel');
+        }
+
+        $malam = max(1, (int) ((strtotime($checkOut) - strtotime($checkIn)) / 86400));
+        $totalHarga = $hotel['harga_per_malam'] * $jumlahKamar * $malam;
+
+        $ok = $this->hotelBookingModel->create([
+            'kode_hotel_booking' => HotelBookingModel::generateKode(),
+            'booking_id'         => $bookingId,
+            'user_id'            => (int) $_SESSION['user_id'],
+            'hotel_id'           => $hotelId,
+            'check_in'           => $checkIn,
+            'check_out'          => $checkOut,
+            'jumlah_kamar'       => $jumlahKamar,
+            'jumlah_tamu'        => $jumlahTamu,
+            'total_harga'        => $totalHarga,
+            'catatan'            => $catatan,
+        ]);
+
+        $this->flash($ok ? 'success' : 'danger', $ok ? 'Booking hotel berhasil dibuat.' : 'Booking hotel gagal.');
+        $this->redirect('/pelanggan/booking/' . $bookingId . '/hotel');
     }
 
     // GET /pelanggan/booking

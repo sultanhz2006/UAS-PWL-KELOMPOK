@@ -154,6 +154,12 @@ class PelangganController extends BaseController {
             'raja ampat'   => 'SOQ',
             'yogyakarta'   => 'JOG',
             'labuan bajo'  => 'LBJ',
+            'lombok'       => 'LOP',
+            'malang'       => 'MLG',
+            'bandung'      => 'BDO',
+            'medan'        => 'KNO',
+            'makassar'     => 'UPG',
+            'belitung'     => 'TJQ',
         ];
 
         return $map[$kota] ?? null;

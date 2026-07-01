@@ -70,7 +70,13 @@ INSERT INTO `paket_wisata` (`id`, `nama_paket`, `destinasi`, `harga`, `deskripsi
 (1, 'Bali Surga Tropis', 'Bali, Indonesia', 2500000.00, 'Nikmati keindahan Bali bersama keluarga: Ubud, Kuta, Tanah Lot.', NULL, 4, 20, 'aktif', '2026-06-19 06:18:31', '2026-06-19 06:18:31'),
 (2, 'Raja Ampat Diving', 'Raja Ampat, Papua', 6800000.00, 'Paket menyelam eksklusif di surga bawah laut Raja Ampat.', NULL, 5, 10, 'aktif', '2026-06-19 06:18:31', '2026-06-19 06:18:31'),
 (3, 'Yogyakarta Heritage', 'Yogyakarta, Indonesia', 1200000.00, 'Jelajahi Keraton, Borobudur, dan Prambanan dalam satu paket hemat.', NULL, 3, 30, 'aktif', '2026-06-19 06:18:31', '2026-06-19 06:18:31'),
-(4, 'Labuan Bajo Adventure', 'Labuan Bajo, NTT', 4500000.00, 'Komodo, Pink Beach, dan snorkeling di taman nasional Labuan Bajo.', NULL, 4, 15, 'aktif', '2026-06-19 06:18:31', '2026-06-19 06:18:31');
+(4, 'Labuan Bajo Adventure', 'Labuan Bajo, NTT', 4500000.00, 'Komodo, Pink Beach, dan snorkeling di taman nasional Labuan Bajo.', NULL, 4, 15, 'aktif', '2026-06-19 06:18:31', '2026-06-19 06:18:31'),
+(5, 'Lombok Mandalika Escape', 'Lombok, Indonesia', 2300000.00, 'Liburan santai ke Pantai Kuta Mandalika, Bukit Merese, dan desa adat Sade.', NULL, 3, 25, 'aktif', '2026-06-19 06:18:31', '2026-06-19 06:18:31'),
+(6, 'Bromo Sunrise Trip', 'Malang, Jawa Timur', 1500000.00, 'Berburu matahari terbit di Gunung Bromo, pasir berbisik, dan savana Teletubbies.', NULL, 2, 18, 'aktif', '2026-06-19 06:18:31', '2026-06-19 06:18:31'),
+(7, 'Bandung Family Tour', 'Bandung, Jawa Barat', 1350000.00, 'Nikmati wisata keluarga ke Lembang, Farmhouse, dan kuliner khas Bandung.', NULL, 3, 28, 'aktif', '2026-06-19 06:18:31', '2026-06-19 06:18:31'),
+(8, 'Medan Lake Toba Journey', 'Medan, Sumatera Utara', 3200000.00, 'Perjalanan ke Danau Toba, Pulau Samosir, dan wisata budaya Batak.', NULL, 4, 20, 'aktif', '2026-06-19 06:18:31', '2026-06-19 06:18:31'),
+(9, 'Makassar Marine Holiday', 'Makassar, Sulawesi Selatan', 2800000.00, 'Jelajahi Pantai Losari, Pulau Samalona, dan kuliner laut khas Makassar.', NULL, 3, 22, 'aktif', '2026-06-19 06:18:31', '2026-06-19 06:18:31'),
+(10, 'Belitung Island Hopping', 'Belitung, Indonesia', 2600000.00, 'Island hopping ke Pulau Lengkuas, Tanjung Tinggi, dan pantai granit Belitung.', NULL, 3, 24, 'aktif', '2026-06-19 06:18:31', '2026-06-19 06:18:31');
 
 -- --------------------------------------------------------
 
@@ -138,7 +144,7 @@ ALTER TABLE `bookings`
 -- AUTO_INCREMENT for table `paket_wisata`
 --
 ALTER TABLE `paket_wisata`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`

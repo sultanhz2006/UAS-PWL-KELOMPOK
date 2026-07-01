@@ -15,6 +15,9 @@ defined('TICKET_PATH') || define('TICKET_PATH', ROOT_PATH . '/storage/pdf_ticket
 defined('MAX_FILE_SIZE')   || define('MAX_FILE_SIZE',   2 * 1024 * 1024);
 defined('ALLOWED_IMG_EXT') || define('ALLOWED_IMG_EXT', ['jpg', 'jpeg', 'png', 'webp']);
 
+defined('AVIATIONSTACK_API_KEY')  || define('AVIATIONSTACK_API_KEY',  'a3ae2ae7c6b039d07a04ba4e1524bd9a');
+defined('AVIATIONSTACK_BASE_URL') || define('AVIATIONSTACK_BASE_URL', 'http://api.aviationstack.com/v1');
+
 defined('SESSION_NAME') || define('SESSION_NAME', 'vyantravel_sess');
 
 date_default_timezone_set('Asia/Jakarta');

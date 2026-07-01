@@ -34,6 +34,50 @@
             </div>
         </div>
 
+        <!-- Info Penerbangan (API Aviationstack) -->
+        <?php if (!empty($penerbangan['penerbangan'])): ?>
+        <div class="stat-card mb-4">
+            <h6 style="font-weight:600;color:#1A2B3C;margin-bottom:12px">
+                <i class="bi bi-airplane-fill text-primary me-2"></i>
+                Penerbangan ke <?= htmlspecialchars($penerbangan['bandara_nama']) ?>
+                (<?= htmlspecialchars($penerbangan['bandara_kode']) ?>)
+            </h6>
+            <div class="table-responsive">
+                <table class="table table-sm align-middle mb-0" style="font-size:.82rem">
+                    <thead style="background:#F8FAFC">
+                        <tr>
+                            <th>Maskapai</th>
+                            <th>Flight</th>
+                            <th>Dari</th>
+                            <th>Berangkat</th>
+                            <th>Tiba</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($penerbangan['penerbangan'] as $f): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($f['maskapai']) ?></td>
+                            <td><span class="badge bg-primary"><?= htmlspecialchars($f['nomor']) ?></span></td>
+                            <td><?= htmlspecialchars($f['dari']) ?></td>
+                            <td><?= htmlspecialchars(substr($f['waktu_berangkat'], 11, 5) ?: $f['waktu_berangkat']) ?></td>
+                            <td><?= htmlspecialchars(substr($f['waktu_tiba'], 11, 5) ?: $f['waktu_tiba']) ?></td>
+                            <td><span class="badge bg-secondary"><?= htmlspecialchars($f['status']) ?></span></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-2" style="font-size:.75rem;color:#94A3B8">
+                Data penerbangan dari Aviationstack API. Dapat berubah sewaktu-waktu.
+            </div>
+        </div>
+        <?php elseif ($penerbangan === null || empty($penerbangan['penerbangan'])): ?>
+        <div class="alert alert-info py-2" style="font-size:.82rem">
+            <i class="bi bi-info-circle me-1"></i>
+            Info penerbangan destinasi belum tersedia atau gagal dimuat dari Aviationstack API.
+        </div>
+        <?php endif; ?>
     </div>
 
     <!-- Kolom Kanan: Form Booking -->

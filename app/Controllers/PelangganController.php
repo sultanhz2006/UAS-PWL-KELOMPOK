@@ -47,9 +47,12 @@ class PelangganController extends BaseController {
             $this->redirect('/pelanggan/paket');
         }
 
+        $penerbangan = $this->getInfoPenerbangan($paket['destinasi']);
+
         $this->view('pelanggan/paket_detail', [
-            'title' => $paket['nama_paket'],
-            'paket' => $paket,
+            'title'       => $paket['nama_paket'],
+            'paket'       => $paket,
+            'penerbangan' => $penerbangan,
         ]);
     }
 
@@ -135,6 +138,86 @@ class PelangganController extends BaseController {
         header('Content-Length: ' . filesize($filePath));
         readfile($filePath);
         exit;
+    }
+
+    // ================================================================
+    //  INTEGRASI API: Aviationstack
+    // ================================================================
+    /**
+     * Mapping nama destinasi paket wisata ke kode bandara IATA.
+     */
+    private function getKodeBandara(string $destinasi): ?string {
+        $kota = strtolower(trim(explode(',', $destinasi)[0]));
+
+        $map = [
+            'bali'         => 'DPS',
+            'raja ampat'   => 'SOQ',
+            'yogyakarta'   => 'JOG',
+            'labuan bajo'  => 'LBJ',
+        ];
+
+        return $map[$kota] ?? null;
+    }
+
+    /**
+     * Ambil info penerbangan ke bandara destinasi via Aviationstack API.
+     * Endpoint: http://api.aviationstack.com/v1/flights
+     */
+    private function getInfoPenerbangan(string $destinasi): ?array {
+        $kodeBandara = $this->getKodeBandara($destinasi);
+        if (!$kodeBandara) {
+            return null;
+        }
+
+        $params = http_build_query([
+            'access_key' => AVIATIONSTACK_API_KEY,
+            'arr_iata'   => $kodeBandara,
+            'limit'      => 5,
+        ]);
+
+        $url = AVIATIONSTACK_BASE_URL . '/flights?' . $params;
+
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL            => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT        => 8,
+            CURLOPT_HTTPHEADER     => ['Accept: application/json'],
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error    = curl_error($ch);
+        curl_close($ch);
+
+        if ($error || $httpCode !== 200) {
+            error_log("Aviationstack API error ({$httpCode}): {$error}");
+            return null;
+        }
+
+        $data = json_decode($response, true);
+        if (json_last_error() !== JSON_ERROR_NONE || empty($data['data'])) {
+            return null;
+        }
+
+        $penerbangan = [];
+        foreach ($data['data'] as $flight) {
+            $penerbangan[] = [
+                'maskapai'        => $flight['airline']['name'] ?? '-',
+                'nomor'           => $flight['flight']['iata'] ?? $flight['flight']['number'] ?? '-',
+                'dari'            => $flight['departure']['iata'] ?? '-',
+                'bandara_asal'    => $flight['departure']['airport'] ?? '-',
+                'waktu_berangkat' => $flight['departure']['scheduled'] ?? '-',
+                'waktu_tiba'      => $flight['arrival']['scheduled'] ?? '-',
+                'status'          => $flight['flight_status'] ?? '-',
+            ];
+        }
+
+        return [
+            'bandara_kode' => $kodeBandara,
+            'bandara_nama' => $data['data'][0]['arrival']['airport'] ?? $kodeBandara,
+            'penerbangan'  => $penerbangan,
+        ];
     }
 
     // ================================================================

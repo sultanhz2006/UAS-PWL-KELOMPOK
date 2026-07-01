@@ -117,7 +117,9 @@ class PelangganController extends BaseController {
         }
 
         $hotelBooking = $this->hotelBookingModel->getByBooking((int) $id, (int) $_SESSION['user_id']);
-        $hotels = $this->hotelModel->getByDestinasi($booking['destinasi']);
+        $checkIn = $booking['tanggal_berangkat'];
+        $checkOut = date('Y-m-d', strtotime($booking['tanggal_berangkat'] . ' +' . (int) $booking['durasi_hari'] . ' days'));
+        $hotels = $this->hotelModel->getByDestinasi($booking['destinasi'], $checkIn, $checkOut);
 
         $this->view('pelanggan/hotel_options', [
             'title'        => 'Pilih Penginapan',
@@ -138,7 +140,7 @@ class PelangganController extends BaseController {
         $catatan     = trim($_POST['catatan'] ?? '');
 
         $booking = $this->bookingModel->findById($bookingId);
-        $hotel   = $this->hotelModel->findById($hotelId);
+        $hotel   = $this->hotelModel->findById($hotelId, $checkIn, $checkOut);
 
         if (!$booking || (int) $booking['user_id'] !== (int) $_SESSION['user_id'] || !$hotel) {
             $this->flash('danger', 'Data booking atau hotel tidak valid.');

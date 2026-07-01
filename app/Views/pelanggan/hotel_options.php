@@ -20,7 +20,7 @@
 
 <div class="alert alert-info py-2" style="font-size:.82rem">
     <i class="bi bi-info-circle me-1"></i>
-    API key Hotelbeds sudah disimpan di folder <code>api_keys</code>. Fitur booking hotel saat ini tetap memakai data hotel lokal sampai API secret Hotelbeds ditambahkan.
+    Pencarian hotel menggunakan integrasi live Booking.com via RapidAPI.
 </div>
 
 <?php if ($hotelBooking): ?>

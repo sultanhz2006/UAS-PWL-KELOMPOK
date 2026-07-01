@@ -34,46 +34,6 @@
             </div>
         </div>
 
-        <!-- Info Cuaca (API OpenWeatherMap) -->
-        <?php if ($cuaca): ?>
-        <div class="stat-card mb-4">
-            <h6 style="font-weight:600;color:#1A2B3C;margin-bottom:12px">
-                <i class="bi bi-cloud-sun-fill text-warning me-2"></i>Cuaca di <?= htmlspecialchars($cuaca['kota']) ?>
-            </h6>
-            <div class="d-flex align-items-center gap-4 flex-wrap">
-                <div class="text-center">
-                    <img src="https://openweathermap.org/img/wn/<?= $cuaca['ikon'] ?>@2x.png"
-                         alt="cuaca" style="width:64px;height:64px">
-                    <div style="font-size:.8rem;color:#64748B"><?= htmlspecialchars($cuaca['deskripsi']) ?></div>
-                </div>
-                <div class="flex-fill row g-2">
-                    <div class="col-6 col-sm-3 text-center p-2"
-                         style="background:#F8FAFC;border-radius:10px">
-                        <div style="font-size:1.4rem;font-weight:700;color:#0A6CFF"><?= $cuaca['suhu'] ?>°</div>
-                        <div style="font-size:.73rem;color:#94A3B8">Suhu (°C)</div>
-                    </div>
-                    <div class="col-6 col-sm-3 text-center p-2"
-                         style="background:#F8FAFC;border-radius:10px">
-                        <div style="font-size:1.4rem;font-weight:700;color:#06B6D4"><?= $cuaca['kelembaban'] ?>%</div>
-                        <div style="font-size:.73rem;color:#94A3B8">Kelembaban</div>
-                    </div>
-                    <div class="col-6 col-sm-3 text-center p-2"
-                         style="background:#F8FAFC;border-radius:10px">
-                        <div style="font-size:1.4rem;font-weight:700;color:#8B5CF6"><?= $cuaca['kecepatan_angin'] ?></div>
-                        <div style="font-size:.73rem;color:#94A3B8">Angin (m/s)</div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-2" style="font-size:.75rem;color:#94A3B8">
-                Data cuaca dari OpenWeatherMap API. Dapat berubah sewaktu-waktu.
-            </div>
-        </div>
-        <?php elseif (OPENWEATHER_API_KEY === 'YOUR_OPENWEATHER_API_KEY_HERE'): ?>
-        <div class="alert alert-info py-2" style="font-size:.82rem">
-            <i class="bi bi-info-circle me-1"></i>
-            Isi <code>OPENWEATHER_API_KEY</code> di <code>config/app.php</code> untuk menampilkan data cuaca destinasi.
-        </div>
-        <?php endif; ?>
     </div>
 
     <!-- Kolom Kanan: Form Booking -->

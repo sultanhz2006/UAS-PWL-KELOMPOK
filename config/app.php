@@ -15,9 +15,6 @@ defined('TICKET_PATH') || define('TICKET_PATH', ROOT_PATH . '/storage/pdf_ticket
 defined('MAX_FILE_SIZE')   || define('MAX_FILE_SIZE',   2 * 1024 * 1024);
 defined('ALLOWED_IMG_EXT') || define('ALLOWED_IMG_EXT', ['jpg', 'jpeg', 'png', 'webp']);
 
-defined('OPENWEATHER_API_KEY')  || define('OPENWEATHER_API_KEY',  'YOUR_OPENWEATHER_API_KEY_HERE');
-defined('OPENWEATHER_BASE_URL') || define('OPENWEATHER_BASE_URL', 'https://api.openweathermap.org/data/2.5/weather');
-
 defined('SESSION_NAME') || define('SESSION_NAME', 'vyantravel_sess');
 
 date_default_timezone_set('Asia/Jakarta');

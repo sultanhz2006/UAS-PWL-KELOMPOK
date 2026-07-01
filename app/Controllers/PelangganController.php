@@ -47,13 +47,9 @@ class PelangganController extends BaseController {
             $this->redirect('/pelanggan/paket');
         }
 
-        // Integrasi API Cuaca OpenWeatherMap
-        $cuaca = $this->getCuacaDestinasi($paket['destinasi']);
-
         $this->view('pelanggan/paket_detail', [
             'title' => $paket['nama_paket'],
             'paket' => $paket,
-            'cuaca' => $cuaca,
         ]);
     }
 
@@ -139,60 +135,6 @@ class PelangganController extends BaseController {
         header('Content-Length: ' . filesize($filePath));
         readfile($filePath);
         exit;
-    }
-
-    // ================================================================
-    //  INTEGRASI API: OpenWeatherMap
-    // ================================================================
-    /**
-     * Ambil data cuaca destinasi menggunakan cURL.
-     * Endpoint: https://api.openweathermap.org/data/2.5/weather
-     */
-    private function getCuacaDestinasi(string $destinasi): ?array {
-        // Ambil nama kota saja (sebelum koma pertama, e.g. "Bali" dari "Bali, Indonesia")
-        $kota = trim(explode(',', $destinasi)[0]);
-
-        $params = http_build_query([
-            'q'     => $kota,
-            'appid' => OPENWEATHER_API_KEY,
-            'units' => 'metric',
-            'lang'  => 'id',
-        ]);
-
-        $url = OPENWEATHER_BASE_URL . '?' . $params;
-
-        $ch = curl_init();
-        curl_setopt_array($ch, [
-            CURLOPT_URL            => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT        => 5,
-            CURLOPT_SSL_VERIFYPEER => true,
-            CURLOPT_HTTPHEADER     => ['Accept: application/json'],
-        ]);
-
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $error    = curl_error($ch);
-        curl_close($ch);
-
-        if ($error || $httpCode !== 200) {
-            error_log("OpenWeather API error ({$httpCode}): {$error}");
-            return null; // Gagal ambil cuaca, tidak fatal
-        }
-
-        $data = json_decode($response, true);
-        if (json_last_error() !== JSON_ERROR_NONE || empty($data['weather'])) {
-            return null;
-        }
-
-        return [
-            'kota'        => $data['name']                     ?? $kota,
-            'suhu'        => $data['main']['temp']             ?? '-',
-            'deskripsi'   => ucfirst($data['weather'][0]['description'] ?? ''),
-            'kelembaban'  => $data['main']['humidity']         ?? '-',
-            'ikon'        => $data['weather'][0]['icon']       ?? '01d',
-            'kecepatan_angin' => $data['wind']['speed']        ?? '-',
-        ];
     }
 
     // ================================================================

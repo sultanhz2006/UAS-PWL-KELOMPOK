@@ -3,7 +3,13 @@
 
 defined('APP_NAME')    || define('APP_NAME',    'VyanTravel');
 defined('APP_VERSION') || define('APP_VERSION', '1.0.0');
-defined('BASE_URL')    || define('BASE_URL',    'http://localhost/PWL/E%20Travel/public');
+
+// Deteksi BASE_URL secara otomatis
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$host = $_SERVER['HTTP_HOST'];
+$basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+
+defined('BASE_URL') || define('BASE_URL', $protocol . '://' . $host . $basePath);
 
 // Path absolut — ROOT_PATH sudah didefinisikan di index.php, cukup turunkan dari sana
 defined('ROOT_PATH')   || define('ROOT_PATH',   dirname(__DIR__));

@@ -115,6 +115,7 @@ Buka browser: `http://localhost/VyanTravel/public`
 | Role | Email | Password |
 |------|-------|----------|
 | Admin | admin@vyantravel.com | Admin@1234 |
+| User | user1@gmail.com | user1user1 |
 
 > ⚠️ **Ganti password admin** setelah pertama login di production!
 

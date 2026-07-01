@@ -95,7 +95,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `nama_lengkap`, `email`, `password`, `no_telp`, `role`, `created_at`, `updated_at`) VALUES
 (1, 'Super Admin', 'admin@vyantravel.com', '$2y$10$eiHjISuqOEnnudnn/gtHKeLabrUO2Xmx2BbQGOCcqd8JGZ/Mz5vbm', NULL, 'admin', '2026-06-19 06:18:31', '2026-06-20 07:07:58'),
-(4, 'budiman', 'budiman@gmail.com', '$2y$12$xAQknzRBwnKHkcOPTh.saezFHZ65Ka3.EjBYjVjOF.sQe/H/kIk0G', '08129382733', 'pelanggan', '2026-06-20 07:34:22', '2026-06-20 07:34:22');
+(4, 'budiman', 'budiman@gmail.com', '$2y$12$xAQknzRBwnKHkcOPTh.saezFHZ65Ka3.EjBYjVjOF.sQe/H/kIk0G', '08129382733', 'pelanggan', '2026-06-20 07:34:22', '2026-06-20 07:34:22'),
+(5, 'User Satu', 'user1@gmail.com', '$2y$12$6ov7.OJOBx8.7wfRPBoD2OO7GF4qnLue3dteTBsFWr6HHxHfnxskO', '08123456789', 'pelanggan', '2026-07-01 10:00:00', '2026-07-01 10:00:00');
 
 --
 -- Indexes for dumped tables

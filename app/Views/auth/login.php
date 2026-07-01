@@ -33,6 +33,12 @@
 </p>
 
 <div class="mt-3 p-2 rounded-2" style="background:#F0F9FF;font-size:.78rem;color:#0369A1">
-    <i class="bi bi-info-circle me-1"></i>
-    Demo admin: <strong>admin@vyantravel.com</strong> / <strong>Admin@1234</strong>
+    <div class="mb-1">
+        <i class="bi bi-info-circle me-1"></i>
+        Demo admin: <strong>admin@vyantravel.com</strong> / <strong>Admin@1234</strong>
+    </div>
+    <div>
+        <i class="bi bi-person me-1"></i>
+        Demo user: <strong>user1@gmail.com</strong> / <strong>user1user1</strong>
+    </div>
 </div>

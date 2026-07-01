@@ -1,0 +1,23 @@
+Options -Indexes
+
+# Semua request dialihkan ke index.php (Front Controller Pattern)
+RewriteEngine On
+
+# Jika request bukan file/folder asli, teruskan ke index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Keamanan tambahan
+<FilesMatch "\.(env|log|sql|sh|git)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Header keamanan
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

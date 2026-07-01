@@ -27,6 +27,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `bookings`
 --
 
+CREATE DATABASE IF NOT EXISTS vyantravel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE vyantravel_db;
+
+
 CREATE TABLE `bookings` (
   `id` int(10) UNSIGNED NOT NULL,
   `kode_booking` varchar(20) NOT NULL,

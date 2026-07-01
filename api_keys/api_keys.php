@@ -5,5 +5,6 @@
 defined('AVIATIONSTACK_API_KEY')  || define('AVIATIONSTACK_API_KEY', 'a3ae2ae7c6b039d07a04ba4e1524bd9a');
 defined('AVIATIONSTACK_BASE_URL') || define('AVIATIONSTACK_BASE_URL', 'http://api.aviationstack.com/v1');
 
-defined('TRAVELPAYOUTS_API_TOKEN') || define('TRAVELPAYOUTS_API_TOKEN', '295731cc7ecf8407fcf05662dfac2e0b');
-defined('TRAVELPAYOUTS_BASE_URL')  || define('TRAVELPAYOUTS_BASE_URL', 'https://api.travelpayouts.com');
+defined('HOTELBEDS_API_KEY')    || define('HOTELBEDS_API_KEY', '7e63b86c6bfaa54023ef2bf4d9aaaa23');
+defined('HOTELBEDS_API_SECRET') || define('HOTELBEDS_API_SECRET', '');
+defined('HOTELBEDS_BASE_URL')   || define('HOTELBEDS_BASE_URL', 'https://api.test.hotelbeds.com');

@@ -20,7 +20,7 @@
 
 <div class="alert alert-info py-2" style="font-size:.82rem">
     <i class="bi bi-info-circle me-1"></i>
-    Token Travelpayouts sudah disimpan di folder <code>api_keys</code>. Fitur booking hotel di aplikasi ini memakai data hotel lokal karena API hotel Travelpayouts/Hotellook tidak lagi melayani booking langsung.
+    API key Hotelbeds sudah disimpan di folder <code>api_keys</code>. Fitur booking hotel saat ini tetap memakai data hotel lokal sampai API secret Hotelbeds ditambahkan.
 </div>
 
 <?php if ($hotelBooking): ?>

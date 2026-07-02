@@ -2,14 +2,14 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
         <h5 style="font-weight:700;color:#1A2B3C;margin:0">Riwayat Booking</h5>
-        <p class="text-muted mb-0" style="font-size:.85rem">Total <?= count($bookings) ?> pesanan</p>
+        <p class="text-muted mb-0" style="font-size:.85rem">Total <?= count($booking) ?> pesanan</p>
     </div>
     <a href="<?= BASE_URL ?>/pelanggan/paket" class="btn btn-primary rounded-3 px-4">
         <i class="bi bi-plus-lg me-1"></i>Pesan Paket Baru
     </a>
 </div>
 
-<?php if (empty($bookings)): ?>
+<?php if (empty($booking)): ?>
 <div class="stat-card text-center py-5">
     <i class="bi bi-ticket-perforated" style="font-size:3rem;color:#CBD5E1;display:block;margin-bottom:12px"></i>
     <h6 style="color:#64748B">Belum ada booking</h6>
@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody>
-            <?php foreach ($bookings as $b): ?>
+            <?php foreach ($booking as $b): ?>
             <tr>
                 <td class="ps-3">
                     <code style="font-size:.78rem;background:#F0F9FF;padding:3px 6px;border-radius:4px">

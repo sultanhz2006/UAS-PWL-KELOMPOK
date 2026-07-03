@@ -148,7 +148,7 @@ class AdminController extends BaseController {
     }
 
     // ================================================================
-    //  BOOKING MANAGEMENT
+    //  Booking Management
     // ================================================================
 
     // GET /admin/booking

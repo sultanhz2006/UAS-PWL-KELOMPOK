@@ -11,9 +11,6 @@ class Database {
     private static string $pass   = '';
     private static string $charset = 'utf8mb4';
 
-    /**
-     * Singleton: satu koneksi PDO dipakai seluruh aplikasi.
-     */
     public static function getConnection(): PDO {
         if (self::$instance === null) {
             $dsn = "mysql:host=" . self::$host
@@ -38,7 +35,6 @@ class Database {
         return self::$instance;
     }
 
-    // Cegah instansiasi & kloning
     private function __construct() {}
     private function __clone() {}
 }

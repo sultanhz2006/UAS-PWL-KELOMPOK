@@ -13,7 +13,7 @@ class AdminController extends BaseController {
     private UserModel        $userModel;
 
     public function __construct() {
-        AuthMiddleware::requireRole('admin'); // Guard di constructor
+        AuthMiddleware::requireRole('admin'); 
         $this->paketModel   = new PaketWisataModel();
         $this->bookingModel = new BookingModel();
         $this->userModel    = new UserModel();

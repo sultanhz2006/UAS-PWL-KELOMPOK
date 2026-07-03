@@ -1,4 +1,3 @@
-<!-- app/Views/admin/dashboard.php -->
 
 <?php
 $booking_stats = $booking_stats ?? ['pending' => 0, 'dikonfirmasi' => 0, 'dibatalkan' => 0];

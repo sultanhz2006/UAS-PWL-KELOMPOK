@@ -1,5 +1,4 @@
 <?php
-// app/Middleware/AuthMiddleware.php
 
 class AuthMiddleware {
 

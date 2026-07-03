@@ -1,4 +1,11 @@
 <!-- app/Views/pelanggan/paket_detail.php -->
+<?php if (!isset($paket) || !is_array($paket)): ?>
+<div class="alert alert-danger py-3" style="font-size:.92rem">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>Paket tidak ditemukan atau data paket tidak tersedia.
+</div>
+<?php return; ?>
+<?php endif; ?>
+<?php $penerbangan = isset($penerbangan) && is_array($penerbangan) ? $penerbangan : []; ?>
 <div class="mb-4">
     <a href="<?= BASE_URL ?>/pelanggan/paket" class="text-decoration-none text-muted" style="font-size:.85rem">
         <i class="bi bi-arrow-left me-1"></i>Kembali ke daftar paket
@@ -35,12 +42,12 @@
         </div>
 
         <!-- Info Penerbangan (API Aviationstack) -->
-        <?php if (!empty($penerbangan['penerbangan'])): ?>
+        <?php if (!empty($penerbangan['penerbangan'] ?? null)): ?>
         <div class="stat-card mb-4">
             <h6 style="font-weight:600;color:#1A2B3C;margin-bottom:12px">
                 <i class="bi bi-airplane-fill text-primary me-2"></i>
-                Penerbangan ke <?= htmlspecialchars($penerbangan['bandara_nama']) ?>
-                (<?= htmlspecialchars($penerbangan['bandara_kode']) ?>)
+                Penerbangan ke <?= htmlspecialchars($penerbangan['bandara_nama'] ?? '') ?>
+                (<?= htmlspecialchars($penerbangan['bandara_kode'] ?? '') ?>)
             </h6>
             <div class="table-responsive">
                 <table class="table table-sm align-middle mb-0" style="font-size:.82rem">
@@ -72,7 +79,7 @@
                 Data penerbangan dari Aviationstack API. Dapat berubah sewaktu-waktu.
             </div>
         </div>
-        <?php elseif ($penerbangan === null || empty($penerbangan['penerbangan'])): ?>
+        <?php else: ?>
         <div class="alert alert-info py-2" style="font-size:.82rem">
             <i class="bi bi-info-circle me-1"></i>
             Info penerbangan destinasi belum tersedia atau gagal dimuat dari Aviationstack API.

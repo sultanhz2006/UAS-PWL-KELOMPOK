@@ -8,6 +8,8 @@
 
 <!-- Summary Booking User -->
 <?php
+$bookings = $bookings ?? [];
+$pakets   = $pakets ?? [];
 $pending       = array_filter($bookings, fn($b) => $b['status'] === 'pending');
 $dikonfirmasi  = array_filter($bookings, fn($b) => $b['status'] === 'dikonfirmasi');
 ?>

@@ -1,4 +1,17 @@
 <!-- app/Views/admin/paket/edit.php -->
+<?php
+$paket = $paket ?? [
+    'id' => '',
+    'nama_paket' => '',
+    'status' => 'aktif',
+    'destinasi' => '',
+    'harga' => '',
+    'durasi_hari' => '',
+    'deskripsi' => '',
+    'kuota' => '',
+    'foto' => '',
+];
+?>
 <div class="mb-4">
     <a href="<?= BASE_URL ?>/admin/paket" class="text-decoration-none text-muted" style="font-size:.85rem">
         <i class="bi bi-arrow-left me-1"></i>Kembali ke daftar paket

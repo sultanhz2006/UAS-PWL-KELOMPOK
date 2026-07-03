@@ -1,4 +1,5 @@
 <!-- app/Views/pelanggan/paket.php -->
+<?php $keyword = $keyword ?? ''; ?>
 <div class="mb-4">
     <h5 style="font-weight:700;color:#1A2B3C">Paket Wisata</h5>
     <!-- Search Bar -->
@@ -9,7 +10,7 @@
             </span>
             <input type="text" name="q" class="form-control border-start-0 ps-0"
                    placeholder="Cari paket atau destinasi..."
-                   value="<?= htmlspecialchars($keyword) ?>">
+                   value="<?= htmlspecialchars($keyword ?? '') ?>">
         </div>
         <button type="submit" class="btn btn-primary rounded-3 px-3">Cari</button>
         <?php if ($keyword): ?>
@@ -53,7 +54,7 @@
                     <i class="bi bi-geo-alt-fill text-primary me-1"></i><?= htmlspecialchars($p['destinasi']) ?>
                 </div>
                 <p class="text-muted mb-3 flex-fill" style="font-size:.82rem;line-height:1.5;
-                   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">
+                   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-clamp:2">
                     <?= htmlspecialchars($p['deskripsi'] ?? '') ?>
                 </p>
                 <div class="d-flex justify-content-between align-items-center mt-auto">

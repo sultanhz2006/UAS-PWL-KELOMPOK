@@ -5,6 +5,13 @@
     </a>
 </div>
 
+<?php if (empty($booking)): ?>
+<div class="alert alert-warning py-2" style="font-size:.82rem">
+    Data booking tidak tersedia. Silakan kembali ke <a href="<?= BASE_URL ?>/pelanggan/booking" class="text-decoration-none">riwayat booking</a>.
+</div>
+<?php return; ?>
+<?php endif; ?>
+
 <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
     <div>
         <h5 style="font-weight:700;color:#1A2B3C;margin:0">Pilih Penginapan</h5>
@@ -23,6 +30,7 @@
     Pencarian hotel menggunakan integrasi live Booking.com via RapidAPI.
 </div>
 
+<?php $hotelBooking = $hotelBooking ?? null; ?>
 <?php if ($hotelBooking): ?>
 <div class="stat-card mb-4">
     <div class="d-flex justify-content-between flex-wrap gap-2">

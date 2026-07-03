@@ -1,4 +1,5 @@
 <!-- app/Views/admin/paket/index.php -->
+<?php $pakets = $pakets ?? []; ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
         <h5 style="font-weight:700;color:#1A2B3C;margin:0">Daftar Paket Wisata</h5>

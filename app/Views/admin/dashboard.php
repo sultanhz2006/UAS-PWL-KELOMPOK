@@ -1,5 +1,11 @@
 <!-- app/Views/admin/dashboard.php -->
 
+<?php
+$booking_stats = $booking_stats ?? ['pending' => 0, 'dikonfirmasi' => 0, 'dibatalkan' => 0];
+$total_user = $total_user ?? 0;
+$pendapatan = $pendapatan ?? 0;
+?>
+
 <div class="row g-4 mb-4">
     <!-- Stat Cards -->
     <div class="col-sm-6 col-xl-3">
@@ -7,7 +13,7 @@
             <div class="icon-wrap" style="background:#EFF6FF">
                 <i class="bi bi-map-fill" style="color:#0A6CFF"></i>
             </div>
-            <div class="stat-value"><?= $total_paket ?></div>
+            <div class="stat-value"><?= $total_paket ?? 0 ?></div>
             <div class="stat-label">Paket Wisata Aktif</div>
         </div>
     </div>

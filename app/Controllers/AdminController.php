@@ -168,6 +168,58 @@ class AdminController extends BaseController {
         $this->redirect('/admin/booking');
     }
 
+    // ----------------------------------------------------------------
+    // GET /admin/booking/export
+    // ----------------------------------------------------------------
+    public function bookingExportCsv(): void {
+        // Mengambil semua data booking beserta detail relasinya
+        $bookings = $this->bookingModel->getAll(); 
+        
+        $filename = "laporan_booking_" . date('Y-m-d_H-i-s') . ".csv";
+
+        // Set header untuk memaksa browser mengunduh file
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+
+        // Buka output stream
+        $output = fopen('php://output', 'w');
+
+        // Tulis header kolom CSV
+        fputcsv($output, [
+            'No', 
+            'Kode Booking', 
+            'Nama Pelanggan', 
+            'Email', 
+            'Nama Paket', 
+            'Destinasi', 
+            'Tanggal Berangkat', 
+            'Jumlah Peserta', 
+            'Total Harga', 
+            'Status'
+        ]);
+
+        // Tulis data per baris
+        $no = 1;
+        foreach ($bookings as $b) {
+            fputcsv($output, [
+                $no++,
+                $b['kode_booking'],
+                $b['nama_lengkap'],
+                $b['email'],
+                $b['nama_paket'],
+                $b['destinasi'],
+                $b['tanggal_berangkat'],
+                $b['jumlah_peserta'],
+                $b['total_harga'],
+                $b['status']
+            ]);
+        }
+
+        // Tutup stream dan hentikan eksekusi script
+        fclose($output);
+        exit;
+    }
+
     //  HELPER: Upload Handler
     private function handleUpload(array $file): string|false {
         if ($file['error'] !== UPLOAD_ERR_OK) {

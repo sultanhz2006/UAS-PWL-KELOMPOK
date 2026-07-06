@@ -47,6 +47,8 @@ class Router {
 
         $this->abort(404, "Halaman tidak ditemukan.");
     }
+    // Route untuk export CSV
+    $routes->get('/admin/booking/export', ['AdminController', 'bookingExportCsv']);
 
     private function abort(int $code, string $msg): void {
         http_response_code($code);

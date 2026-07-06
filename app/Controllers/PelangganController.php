@@ -33,15 +33,20 @@ class PelangganController extends BaseController {
 
     // GET /pelanggan/paket
     public function paketList(): void {
-        $keyword = trim($_GET['q'] ?? '');
-        $pakets  = $keyword
-            ? $this->paketModel->search($keyword)
-            : $this->paketModel->getAll('aktif');
+        $filters = [
+            'keyword'   => trim($_GET['q'] ?? ''),
+            'destinasi' => trim($_GET['destinasi'] ?? ''),
+            'sort'      => trim($_GET['sort'] ?? ''),
+        ];
 
         $this->view('pelanggan/paket', [
-            'title'   => 'Paket Wisata',
-            'pakets'  => $pakets,
-            'keyword' => $keyword,
+            'title'      => 'Paket Wisata',
+            'pakets'     => $this->paketModel->filterActive($filters),
+            'filters'    => $filters,
+            'keyword'    => $filters['keyword'],
+            'destinasi'  => $filters['destinasi'],
+            'sort'       => $filters['sort'],
+            'destinasis' => $this->paketModel->getActiveDestinations(),
         ]);
     }
 

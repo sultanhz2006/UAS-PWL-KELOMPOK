@@ -1,20 +1,70 @@
 <!-- app/Views/pelanggan/paket.php -->
-<?php $keyword = $keyword ?? ''; ?>
+<?php
+$keyword    = $keyword ?? '';
+$destinasi  = $destinasi ?? '';
+$sort       = $sort ?? '';
+$destinasis = $destinasis ?? [];
+$hasFilter  = $keyword !== '' || $destinasi !== '' || $sort !== '';
+$sortOptions = [
+    'terbaru'      => 'Terbaru',
+    'harga_asc'    => 'Harga terendah',
+    'harga_desc'   => 'Harga tertinggi',
+    'durasi_asc'   => 'Durasi tersingkat',
+    'durasi_desc'  => 'Durasi terlama',
+];
+?>
 <div class="mb-4">
     <h5 style="font-weight:700;color:#1A2B3C">Paket Wisata</h5>
-    <!-- Search Bar -->
-    <form method="GET" action="<?= BASE_URL ?>/pelanggan/paket" class="d-flex gap-2" style="max-width:400px">
-        <div class="input-group">
-            <span class="input-group-text bg-white border-end-0">
-                <i class="bi bi-search text-muted"></i>
-            </span>
-            <input type="text" name="q" class="form-control border-start-0 ps-0"
-                   placeholder="Cari paket atau destinasi..."
-                   value="<?= htmlspecialchars($keyword ?? '') ?>">
+    <!-- Search & Filter -->
+    <form method="GET" action="<?= BASE_URL ?>/pelanggan/paket" class="stat-card p-3 mt-3">
+        <div class="row g-2 align-items-end">
+            <div class="col-md-5">
+                <label class="form-label" style="font-size:.8rem;color:#64748B">Cari Paket</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input type="text" name="q" class="form-control border-start-0 ps-0"
+                           placeholder="Nama paket atau destinasi..."
+                           value="<?= htmlspecialchars($keyword) ?>">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" style="font-size:.8rem;color:#64748B">Destinasi</label>
+                <select name="destinasi" class="form-select">
+                    <option value="">Semua destinasi</option>
+                    <?php foreach ($destinasis as $d): ?>
+                    <option value="<?= htmlspecialchars($d) ?>" <?= $destinasi === $d ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($d) ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" style="font-size:.8rem;color:#64748B">Urutkan</label>
+                <select name="sort" class="form-select">
+                    <?php foreach ($sortOptions as $value => $label): ?>
+                    <option value="<?= $value ?>" <?= ($sort ?: 'terbaru') === $value ? 'selected' : '' ?>>
+                        <?= $label ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="col-md-1 d-grid">
+                <button type="submit" class="btn btn-primary rounded-3">
+                    <i class="bi bi-funnel"></i>
+                </button>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary rounded-3 px-3">Cari</button>
-        <?php if ($keyword): ?>
-        <a href="<?= BASE_URL ?>/pelanggan/paket" class="btn btn-outline-secondary rounded-3">Reset</a>
+        <?php if ($hasFilter): ?>
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-3 pt-3 border-top">
+            <div class="text-muted" style="font-size:.82rem">
+                Menampilkan <?= count($pakets) ?> paket sesuai filter.
+            </div>
+            <a href="<?= BASE_URL ?>/pelanggan/paket" class="btn btn-sm btn-outline-secondary rounded-3">
+                Reset Filter
+            </a>
+        </div>
         <?php endif; ?>
     </form>
 </div>
@@ -22,7 +72,8 @@
 <?php if (empty($pakets)): ?>
 <div class="text-center py-5">
     <i class="bi bi-emoji-frown" style="font-size:3rem;color:#CBD5E1"></i>
-    <p class="text-muted mt-2">Tidak ada paket wisata<?= $keyword ? " untuk \"$keyword\"" : '' ?>.</p>
+    <p class="text-muted mt-2">Tidak ada paket wisata yang cocok dengan filter.</p>
+    <a href="<?= BASE_URL ?>/pelanggan/paket" class="btn btn-outline-primary rounded-3 mt-1">Reset Filter</a>
 </div>
 <?php else: ?>
 <div class="row g-4">

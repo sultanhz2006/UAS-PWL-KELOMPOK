@@ -107,10 +107,11 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-500" style="font-size:.85rem">Jumlah Peserta</label>
-                    <input type="number" name="jumlah_peserta" class="form-control"
+                    <input type="number" name="jumlah_peserta" id="jumlahPeserta" class="form-control"
                            min="1" max="<?= $paket['kuota'] ?>" value="1" required
-                           onchange="hitungTotal(this.value)">
+                           oninput="hitungTotal(this.value)">
                     <div class="form-text">Maks. <?= $paket['kuota'] ?> orang</div>
+                    <div id="pesertaError" class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-500" style="font-size:.85rem">Catatan (Opsional)</label>
@@ -121,7 +122,7 @@
                 <!-- Kalkulasi Harga -->
                 <div class="p-3 rounded-3 mb-3" style="background:#F0F9FF">
                     <div class="d-flex justify-content-between" style="font-size:.82rem;color:#64748B">
-                        <span>Harga × Peserta</span>
+                        <span>Harga x Peserta</span>
                         <span id="totalDisplay">Rp <?= number_format($paket['harga'], 0, ',', '.') ?></span>
                     </div>
                     <hr class="my-2">
@@ -131,7 +132,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100 rounded-3 py-2" style="font-weight:600">
+                <button type="submit" id="btnPesan" class="btn btn-primary w-100 rounded-3 py-2" style="font-weight:600">
                     <i class="bi bi-calendar-plus me-2"></i>Pesan Sekarang
                 </button>
             </form>
@@ -140,11 +141,42 @@
 </div>
 
 <script>
-const hargaSatuan = <?= $paket['harga'] ?>;
+const hargaSatuan = <?= (int) $paket['harga'] ?>;
+const kuotaMaksimal = <?= (int) $paket['kuota'] ?>;
+const jumlahPesertaInput = document.getElementById('jumlahPeserta');
+const pesertaError = document.getElementById('pesertaError');
+const btnPesan = document.getElementById('btnPesan');
+const totalDisplay = document.getElementById('totalDisplay');
+const totalFinal = document.getElementById('totalFinal');
+
 function hitungTotal(jumlah) {
-    const total = hargaSatuan * parseInt(jumlah || 1);
-    const fmt   = new Intl.NumberFormat('id-ID').format(total);
-    document.getElementById('totalDisplay').textContent = 'Rp ' + fmt;
-    document.getElementById('totalFinal').textContent   = 'Rp ' + fmt;
+    const peserta = parseInt(jumlah, 10);
+    let pesanError = '';
+
+    if (!peserta || peserta < 1) {
+        pesanError = 'Jumlah peserta minimal 1 orang.';
+    } else if (peserta > kuotaMaksimal) {
+        pesanError = 'Jumlah peserta tidak boleh melebihi kuota.';
+    }
+
+    if (pesanError) {
+        jumlahPesertaInput.classList.add('is-invalid');
+        pesertaError.textContent = pesanError;
+        btnPesan.disabled = true;
+        totalDisplay.textContent = '-';
+        totalFinal.textContent = '-';
+        return;
+    }
+
+    jumlahPesertaInput.classList.remove('is-invalid');
+    pesertaError.textContent = '';
+    btnPesan.disabled = false;
+
+    const total = hargaSatuan * peserta;
+    const fmt = new Intl.NumberFormat('id-ID').format(total);
+    totalDisplay.textContent = 'Rp ' + fmt;
+    totalFinal.textContent = 'Rp ' + fmt;
 }
+
+hitungTotal(jumlahPesertaInput.value);
 </script>

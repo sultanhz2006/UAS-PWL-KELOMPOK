@@ -1,7 +1,7 @@
 <!-- app/Views/pelanggan/dashboard.php -->
 <div class="mb-4">
     <h5 style="font-weight:700;color:#1A2B3C">
-        Halo, <?= htmlspecialchars($_SESSION['user_name']) ?>! 👋
+        Halo, <?= htmlspecialchars($_SESSION['user_name']) ?>!
     </h5>
     <p class="text-muted mb-0" style="font-size:.9rem">Siap merencanakan perjalanan impianmu?</p>
 </div>

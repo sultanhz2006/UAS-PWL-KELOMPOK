@@ -9,9 +9,9 @@
 </head>
 <body>
 <div class="container text-center py-5">
-    <div style="font-size:5rem;color:#EF4444">🚫</div>
+    <div style="font-size:5rem;color:#EF4444">!</div>
     <h1 class="fw-bold text-danger">403</h1>
     <p class="lead text-muted">Akses ditolak. Anda tidak memiliki izin untuk membuka halaman ini.</p>
-    <a href="javascript:history.back()" class="btn btn-outline-secondary rounded-3">← Kembali</a>
+    <a href="javascript:history.back()" class="btn btn-outline-secondary rounded-3">&larr; Kembali</a>
 </div>
 </body></html>

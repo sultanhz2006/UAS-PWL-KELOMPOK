@@ -53,7 +53,7 @@
     </button>
 </form>
 
-<div class="divider">— atau —</div>
+<div class="divider">atau</div>
 <p class="text-center" style="font-size:.85rem;color:#374151">
     Sudah punya akun?
     <a href="<?= BASE_URL ?>/login" style="color:#0A6CFF;font-weight:600;text-decoration:none">Masuk di sini</a>

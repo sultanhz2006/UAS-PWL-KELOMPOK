@@ -34,9 +34,7 @@ class AdminController extends BaseController {
         $this->view('admin/dashboard', $data);
     }
 
-    // ================================================================
-    //  PAKET WISATA — CRUD
-    // ================================================================
+    
 
     // GET /admin/paket
     public function paketIndex(): void {
@@ -147,9 +145,7 @@ class AdminController extends BaseController {
         $this->redirect('/admin/paket');
     }
 
-    // ================================================================
-    //  Booking Management
-    // ================================================================
+    //Booking Management
 
     // GET /admin/booking
     public function bookingIndex(): void {
@@ -172,9 +168,7 @@ class AdminController extends BaseController {
         $this->redirect('/admin/booking');
     }
 
-    // ================================================================
     //  HELPER: Upload Handler
-    // ================================================================
     private function handleUpload(array $file): string|false {
         if ($file['error'] !== UPLOAD_ERR_OK) {
             $this->flash('danger', 'Terjadi kesalahan saat upload file.');

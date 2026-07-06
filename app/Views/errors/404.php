@@ -9,9 +9,9 @@
 </head>
 <body>
 <div class="container text-center py-5">
-    <div style="font-size:5rem">🗺️</div>
+    <div style="font-size:5rem">404</div>
     <h1 class="fw-bold" style="color:#0A6CFF">404</h1>
     <p class="lead text-muted">Halaman yang Anda cari tidak ditemukan.</p>
-    <a href="<?= defined('BASE_URL') ? BASE_URL : '/' ?>/login" class="btn btn-primary rounded-3">← Ke Beranda</a>
+    <a href="<?= defined('BASE_URL') ? BASE_URL : '/' ?>/login" class="btn btn-primary rounded-3">&larr; Ke Beranda</a>
 </div>
 </body></html>

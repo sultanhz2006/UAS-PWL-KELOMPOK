@@ -119,10 +119,13 @@ class PaketWisataModel {
         $stmt = $this->db->prepare(
             "SELECT * FROM paket_wisata
               WHERE status = 'aktif'
-                AND (nama_paket LIKE :kw OR destinasi LIKE :kw)
+                AND (nama_paket LIKE :kw_nama OR destinasi LIKE :kw_destinasi)
               ORDER BY nama_paket"
         );
-        $stmt->execute([':kw' => "%{$keyword}%"]);
+        $stmt->execute([
+            ':kw_nama'      => "%{$keyword}%",
+            ':kw_destinasi' => "%{$keyword}%",
+        ]);
         return $stmt->fetchAll();
     }
 
@@ -144,8 +147,9 @@ class PaketWisataModel {
         $params = [];
 
         if (!empty($filters['keyword'])) {
-            $sql .= " AND (nama_paket LIKE :kw OR destinasi LIKE :kw)";
-            $params[':kw'] = '%' . $filters['keyword'] . '%';
+            $sql .= " AND (nama_paket LIKE :kw_nama OR destinasi LIKE :kw_destinasi)";
+            $params[':kw_nama'] = '%' . $filters['keyword'] . '%';
+            $params[':kw_destinasi'] = '%' . $filters['keyword'] . '%';
         }
 
         if (!empty($filters['destinasi'])) {

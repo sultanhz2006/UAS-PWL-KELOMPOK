@@ -103,6 +103,29 @@
         body.dark-mode .form-select:focus {
             border-color: #60a5fa;
             box-shadow: 0 0 0 0.2rem rgba(96,165,250,.25);
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        /* Placeholder teks di dark mode */
+        body.dark-mode .form-control::placeholder,
+        body.dark-mode .form-select::placeholder,
+        body.dark-mode textarea.form-control::placeholder {
+            color: #64748b !important;
+            opacity: 1;
+        }
+        /* Label form di dark mode */
+        body.dark-mode .form-label,
+        body.dark-mode label {
+            color: #cbd5e1 !important;
+        }
+        /* Input number spinner & file input */
+        body.dark-mode input[type="number"],
+        body.dark-mode input[type="file"] {
+            color-scheme: dark;
+        }
+        body.dark-mode .form-text,
+        body.dark-mode small.text-muted {
+            color: #64748b !important;
         }
         body.dark-mode .btn-outline-secondary {
             color: #e2e8f0;

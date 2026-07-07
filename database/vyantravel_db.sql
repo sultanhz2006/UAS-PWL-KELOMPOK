@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2026 at 11:35 AM
+-- Generation Time: Jul 01, 2026 at 10:37 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -26,6 +26,10 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `bookings`
 --
+
+CREATE DATABASE IF NOT EXISTS vyantravel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE vyantravel_db;
+
 
 CREATE TABLE `bookings` (
   `id` int(10) UNSIGNED NOT NULL,

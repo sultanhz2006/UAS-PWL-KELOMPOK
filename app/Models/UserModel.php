@@ -9,7 +9,6 @@ class UserModel {
         $this->db = Database::getConnection();
     }
 
-    /** Cari user berdasarkan email (untuk login). */
     public function findByEmail(string $email): array|false {
         $stmt = $this->db->prepare(
             "SELECT id, nama_lengkap, email, password, role
@@ -21,7 +20,6 @@ class UserModel {
         return $stmt->fetch();
     }
 
-    /** Cari user berdasarkan ID. */
     public function findById(int $id): array|false {
         $stmt = $this->db->prepare(
             "SELECT id, nama_lengkap, email, no_telp, role, created_at
@@ -33,7 +31,6 @@ class UserModel {
         return $stmt->fetch();
     }
 
-    /** Daftar semua user (untuk panel admin). */
     public function getAll(string $role = ''): array {
         if ($role) {
             $stmt = $this->db->prepare(
@@ -53,7 +50,6 @@ class UserModel {
         return $stmt->fetchAll();
     }
 
-    /** Buat akun baru. Password di-hash di Controller sebelum masuk sini. */
     public function create(array $data): bool {
         $stmt = $this->db->prepare(
             "INSERT INTO users (nama_lengkap, email, password, no_telp, role)
@@ -68,7 +64,6 @@ class UserModel {
         ]);
     }
 
-    /** Cek apakah email sudah terdaftar. */
     public function emailExists(string $email): bool {
         $stmt = $this->db->prepare(
             "SELECT COUNT(*) FROM users WHERE email = :email"
@@ -77,7 +72,6 @@ class UserModel {
         return (int) $stmt->fetchColumn() > 0;
     }
 
-    /** Update profil user. */
     public function update(int $id, array $data): bool {
         $stmt = $this->db->prepare(
             "UPDATE users

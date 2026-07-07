@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2026 at 10:37 AM
+-- Generation Time: Jul 07, 2026 at 03:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -27,10 +27,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `bookings`
 --
 
-CREATE DATABASE IF NOT EXISTS vyantravel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE vyantravel_db;
-
-
 CREATE TABLE `bookings` (
   `id` int(10) UNSIGNED NOT NULL,
   `kode_booking` varchar(20) NOT NULL,
@@ -52,14 +48,17 @@ CREATE TABLE `bookings` (
 
 INSERT INTO `bookings` (`id`, `kode_booking`, `user_id`, `paket_id`, `tanggal_pesan`, `tanggal_berangkat`, `jumlah_peserta`, `total_harga`, `status`, `catatan`, `pdf_path`, `created_at`) VALUES
 (1, 'VT-20260701-B101C', 4, 1, '2026-07-01', '2026-07-22', 1, 2500000.00, 'dibatalkan', '', 'tiket-VT-20260701-B101C-1782890378.pdf', '2026-07-01 05:03:05'),
-(2, 'VT-20260701-EF2D6', 4, 7, '2026-07-01', '2026-07-29', 1, 1350000.00, 'pending', '', 'tiket-VT-20260701-EF2D6-1782889554.pdf', '2026-07-01 07:05:54'),
+(2, 'VT-20260701-EF2D6', 4, 7, '2026-07-01', '2026-07-29', 1, 1350000.00, 'dikonfirmasi', '', 'tiket-VT-20260701-EF2D6-1782889554.pdf', '2026-07-01 07:05:54'),
 (3, 'VT-20260701-D14EF', 4, 5, '2026-07-01', '2026-07-31', 1, 2300000.00, 'pending', '', 'tiket-VT-20260701-D14EF-1782890376.pdf', '2026-07-01 07:06:10'),
 (4, 'VT-20260701-1B548', 4, 2, '2026-07-01', '2026-07-22', 1, 6800000.00, 'pending', '', 'tiket-VT-20260701-1B548-1782891425.pdf', '2026-07-01 07:06:33'),
 (5, 'VT-20260701-3B8FB', 4, 5, '2026-07-01', '2026-07-23', 1, 2300000.00, 'pending', '', 'tiket-VT-20260701-3B8FB-1782891427.pdf', '2026-07-01 07:21:25'),
 (6, 'VT-20260701-A757A', 4, 7, '2026-07-01', '2026-07-22', 1, 1350000.00, 'pending', '', 'tiket-VT-20260701-A757A-1782891438.pdf', '2026-07-01 07:37:18'),
 (7, 'VT-20260701-1D963', 4, 5, '2026-07-01', '2026-07-16', 1, 2300000.00, 'pending', '', 'tiket-VT-20260701-1D963-1782894127.pdf', '2026-07-01 08:22:07'),
 (8, 'VT-20260701-0D1BD', 4, 5, '2026-07-01', '2026-07-30', 1, 2300000.00, 'pending', '', 'tiket-VT-20260701-0D1BD-1782894233.pdf', '2026-07-01 08:23:53'),
-(9, 'VT-20260701-57C5C', 4, 3, '2026-07-01', '2026-07-15', 3, 3600000.00, 'pending', '', 'tiket-VT-20260701-57C5C-1782894260.pdf', '2026-07-01 08:24:20');
+(9, 'VT-20260701-57C5C', 4, 3, '2026-07-01', '2026-07-15', 3, 3600000.00, 'pending', '', 'tiket-VT-20260701-57C5C-1782894260.pdf', '2026-07-01 08:24:20'),
+(10, 'VT-20260707-C3BC2', 4, 5, '2026-07-07', '2026-07-22', 1, 2300000.00, 'pending', '', 'tiket-VT-20260707-C3BC2-1783425357.pdf', '2026-07-07 11:55:57'),
+(11, 'VT-20260707-5A9FD', 4, 6, '2026-07-07', '2026-07-23', 1, 1500000.00, 'pending', '', 'tiket-VT-20260707-5A9FD-1783425378.pdf', '2026-07-07 11:56:18'),
+(12, 'VT-20260707-ED664', 4, 6, '2026-07-07', '2026-07-29', 1, 1500000.00, 'pending', '', 'tiket-VT-20260707-ED664-1783427917.pdf', '2026-07-07 12:38:37');
 
 -- --------------------------------------------------------
 
@@ -95,7 +94,8 @@ INSERT INTO `hotels` (`id`, `nama_hotel`, `destinasi`, `harga_per_malam`, `binta
 (7, 'Lembang Family Stay', 'Bandung, Jawa Barat', 620000.00, 3, 'Lembang, Bandung', 'Penginapan keluarga dengan akses mudah ke wisata Lembang.', NULL, 'aktif', '2026-07-01 06:47:48', '2026-07-01 06:47:48'),
 (8, 'Toba Lake Hotel', 'Medan, Sumatera Utara', 720000.00, 4, 'Parapat, Sumatera Utara', 'Hotel dengan akses perjalanan menuju Danau Toba dan Samosir.', NULL, 'aktif', '2026-07-01 06:47:48', '2026-07-01 06:47:48'),
 (9, 'Losari Sea View Hotel', 'Makassar, Sulawesi Selatan', 690000.00, 4, 'Pantai Losari, Makassar', 'Hotel kota dekat Pantai Losari dan pusat kuliner Makassar.', NULL, 'aktif', '2026-07-01 06:47:48', '2026-07-01 06:47:48'),
-(10, 'Belitung Island Hotel', 'Belitung, Indonesia', 650000.00, 3, 'Tanjung Pandan, Belitung', 'Hotel nyaman untuk island hopping dan wisata pantai granit.', NULL, 'aktif', '2026-07-01 06:47:48', '2026-07-01 06:47:48');
+(10, 'Belitung Island Hotel', 'Belitung, Indonesia', 650000.00, 3, 'Tanjung Pandan, Belitung', 'Hotel nyaman untuk island hopping dan wisata pantai granit.', NULL, 'aktif', '2026-07-01 06:47:48', '2026-07-01 06:47:48'),
+(14632427, 'Terima Kasih Malang Hostel', 'Kota Malang, Indonesia', 66190.00, 4, 'Jl Widas No.P8 Perum Srikandi, Bunulrejo, Blimbing, Kota Malang', 'Hotel nyaman di Kota Malang', NULL, 'aktif', '2026-07-07 12:38:47', '2026-07-07 12:38:47');
 
 -- --------------------------------------------------------
 
@@ -124,7 +124,8 @@ CREATE TABLE `hotel_bookings` (
 --
 
 INSERT INTO `hotel_bookings` (`id`, `kode_hotel_booking`, `booking_id`, `user_id`, `hotel_id`, `check_in`, `check_out`, `jumlah_kamar`, `jumlah_tamu`, `total_harga`, `status`, `catatan`, `created_at`) VALUES
-(1, 'HTL-20260701-42F21', 2, 4, 7, '2026-07-29', '2026-08-01', 1, 1, 1860000.00, 'pending', '', '2026-07-01 07:05:57');
+(1, 'HTL-20260701-42F21', 2, 4, 7, '2026-07-29', '2026-08-01', 1, 1, 1860000.00, 'pending', '', '2026-07-01 07:05:57'),
+(2, 'HTL-20260707-19F9E', 12, 4, 14632427, '2026-07-29', '2026-07-31', 1, 1, 132380.00, 'pending', '', '2026-07-07 12:38:47');
 
 -- --------------------------------------------------------
 
@@ -237,19 +238,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14632428;
 
 --
 -- AUTO_INCREMENT for table `hotel_bookings`
 --
 ALTER TABLE `hotel_bookings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `paket_wisata`

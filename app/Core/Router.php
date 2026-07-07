@@ -12,10 +12,8 @@ class Router {
     }
 
     public function dispatch(string $method, string $uri): void {
-        // Bersihkan query string
         $uri = strtok($uri, '?');
         $uri = urldecode($uri);
-        // Hapus base path agar routing bekerja di subfolder
         $base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
         $uri  = '/' . ltrim(substr($uri, strlen($base)), '/');
         $uri  = ($uri === '') ? '/' : $uri;
@@ -23,14 +21,12 @@ class Router {
         $routes = $this->routes[$method] ?? [];
 
         foreach ($routes as $route => $handler) {
-            // Konversi :param ke regex
             $pattern = preg_replace('#:([a-zA-Z0-9_]+)#', '(?P<$1>[^/]+)', $route);
             $pattern = '#^' . $pattern . '$#';
 
             if (preg_match($pattern, $uri, $matches)) {
                 [$controllerClass, $methodName] = $handler;
 
-                // Auto-load controller
                 $file = APP_PATH . '/Controllers/' . $controllerClass . '.php';
                 if (!file_exists($file)) {
                     $this->abort(500, "Controller $controllerClass tidak ditemukan.");

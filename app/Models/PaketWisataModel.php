@@ -9,7 +9,6 @@ class PaketWisataModel {
         $this->db = Database::getConnection();
     }
 
-    /** Ambil semua paket (bisa difilter by status). */
     public function getAll(string $status = 'aktif'): array {
         if ($status === 'all') {
             $stmt = $this->db->query(
@@ -24,7 +23,6 @@ class PaketWisataModel {
         return $stmt->fetchAll();
     }
 
-    /** Cari paket berdasarkan ID. */
     public function findById(int $id): array|false {
         $stmt = $this->db->prepare(
             "SELECT * FROM paket_wisata WHERE id = :id LIMIT 1"
@@ -33,7 +31,6 @@ class PaketWisataModel {
         return $stmt->fetch();
     }
 
-    /** Buat paket baru (Admin). */
     public function create(array $data): bool {
         $stmt = $this->db->prepare(
             "INSERT INTO paket_wisata
@@ -53,9 +50,7 @@ class PaketWisataModel {
         ]);
     }
 
-    /** Update paket (Admin). */
     public function update(int $id, array $data): bool {
-        // Jika ada foto baru, update foto; jika tidak, biarkan tetap
         if (!empty($data['foto'])) {
             $stmt = $this->db->prepare(
                 "UPDATE paket_wisata
@@ -97,7 +92,6 @@ class PaketWisataModel {
         ]));
     }
 
-    /** Hapus paket (Admin). */
     public function delete(int $id): bool {
         $stmt = $this->db->prepare(
             "DELETE FROM paket_wisata WHERE id = :id"
@@ -105,7 +99,6 @@ class PaketWisataModel {
         return $stmt->execute([':id' => $id]);
     }
 
-    /** Total paket aktif (untuk dashboard). */
     public function countActive(): int {
         $stmt = $this->db->query(
             "SELECT COUNT(*) FROM paket_wisata WHERE status = 'aktif'"
@@ -113,7 +106,6 @@ class PaketWisataModel {
         return (int) $stmt->fetchColumn();
     }
 
-    /** Cari paket berdasarkan keyword. */
     public function search(string $keyword): array {
         $stmt = $this->db->prepare(
             "SELECT * FROM paket_wisata

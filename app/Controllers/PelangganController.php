@@ -8,9 +8,9 @@ require_once APP_PATH . '/Models/HotelBookingModel.php';
 require_once APP_PATH . '/Middleware/AuthMiddleware.php';
 
 class PelangganController extends BaseController {
-    private PaketWisataModel $paketModel;
-    private BookingModel     $bookingModel;
-    private HotelModel       $hotelModel;
+    private PaketWisataModel  $paketModel;
+    private BookingModel      $bookingModel;
+    private HotelModel        $hotelModel;
     private HotelBookingModel $hotelBookingModel;
 
     public function __construct() {
@@ -21,7 +21,6 @@ class PelangganController extends BaseController {
         $this->hotelBookingModel = new HotelBookingModel();
     }
 
-    // GET /pelanggan/dashboard
     public function dashboard(): void {
         $this->view('pelanggan/dashboard', [
             'title'    => 'Dashboard — ' . APP_NAME,
@@ -30,7 +29,6 @@ class PelangganController extends BaseController {
         ]);
     }
 
-    // GET /pelanggan/paket
     public function paketList(): void {
         $keyword = trim($_GET['q'] ?? '');
         $pakets  = $keyword
@@ -44,7 +42,6 @@ class PelangganController extends BaseController {
         ]);
     }
 
-    // GET /pelanggan/paket/:id
     public function paketDetail(string $id): void {
         $paket = $this->paketModel->findById((int) $id);
         if (!$paket || $paket['status'] !== 'aktif') {
@@ -61,14 +58,12 @@ class PelangganController extends BaseController {
         ]);
     }
 
-    // POST /pelanggan/booking/store
     public function bookingStore(): void {
-        $paketId  = (int) ($_POST['paket_id']          ?? 0);
-        $tgl      = trim($_POST['tanggal_berangkat']    ?? '');
-        $jumlah   = (int) ($_POST['jumlah_peserta']     ?? 1);
-        $catatan  = trim($_POST['catatan']              ?? '');
+        $paketId = (int) ($_POST['paket_id']          ?? 0);
+        $tgl     = trim($_POST['tanggal_berangkat']    ?? '');
+        $jumlah  = (int) ($_POST['jumlah_peserta']     ?? 1);
+        $catatan = trim($_POST['catatan']              ?? '');
 
-        // Validasi
         $paket = $this->paketModel->findById($paketId);
         if (!$paket || $paket['status'] !== 'aktif') {
             $this->flash('danger', 'Paket tidak valid.');
@@ -97,7 +92,6 @@ class PelangganController extends BaseController {
         ]);
 
         if ($bookingId) {
-            // Generate PDF tiket otomatis
             $this->generatePdfTiket($bookingId);
             $this->flash('success', "Booking berhasil! Kode: <strong>{$kodeBooking}</strong>. Kamu bisa lanjut pilih penginapan.");
             $this->redirect('/pelanggan/booking/' . $bookingId . '/hotel');
@@ -107,7 +101,6 @@ class PelangganController extends BaseController {
         }
     }
 
-    // GET /pelanggan/booking/:id/hotel
     public function hotelOptions(string $id): void {
         $booking = $this->bookingModel->findById((int) $id);
         if (!$booking || (int) $booking['user_id'] !== (int) $_SESSION['user_id']) {
@@ -116,9 +109,9 @@ class PelangganController extends BaseController {
         }
 
         $hotelBooking = $this->hotelBookingModel->getByBooking((int) $id, (int) $_SESSION['user_id']);
-        $checkIn = $booking['tanggal_berangkat'];
+        $checkIn  = $booking['tanggal_berangkat'];
         $checkOut = date('Y-m-d', strtotime($booking['tanggal_berangkat'] . ' +' . (int) $booking['durasi_hari'] . ' days'));
-        $hotels = $this->hotelModel->getByDestinasi($booking['destinasi'], $checkIn, $checkOut);
+        $hotels   = $this->hotelModel->getByDestinasi($booking['destinasi'], $checkIn, $checkOut);
 
         $this->view('pelanggan/hotel_options', [
             'title'        => 'Pilih Penginapan',
@@ -128,15 +121,14 @@ class PelangganController extends BaseController {
         ]);
     }
 
-    // POST /pelanggan/hotel-booking/store
     public function hotelBookingStore(): void {
-        $bookingId   = (int) ($_POST['booking_id'] ?? 0);
-        $hotelId     = (int) ($_POST['hotel_id'] ?? 0);
-        $checkIn     = trim($_POST['check_in'] ?? '');
-        $checkOut    = trim($_POST['check_out'] ?? '');
+        $bookingId   = (int) ($_POST['booking_id']   ?? 0);
+        $hotelId     = (int) ($_POST['hotel_id']     ?? 0);
+        $checkIn     = trim($_POST['check_in']        ?? '');
+        $checkOut    = trim($_POST['check_out']       ?? '');
         $jumlahKamar = (int) ($_POST['jumlah_kamar'] ?? 1);
-        $jumlahTamu  = (int) ($_POST['jumlah_tamu'] ?? 1);
-        $catatan     = trim($_POST['catatan'] ?? '');
+        $jumlahTamu  = (int) ($_POST['jumlah_tamu']  ?? 1);
+        $catatan     = trim($_POST['catatan']         ?? '');
 
         $booking = $this->bookingModel->findById($bookingId);
         $hotel   = $this->hotelModel->findById($hotelId, $checkIn, $checkOut);
@@ -161,7 +153,7 @@ class PelangganController extends BaseController {
             $this->redirect('/pelanggan/booking/' . $bookingId . '/hotel');
         }
 
-        $malam = max(1, (int) ((strtotime($checkOut) - strtotime($checkIn)) / 86400));
+        $malam      = max(1, (int) ((strtotime($checkOut) - strtotime($checkIn)) / 86400));
         $totalHarga = $hotel['harga_per_malam'] * $jumlahKamar * $malam;
 
         $ok = $this->hotelBookingModel->create([
@@ -181,7 +173,6 @@ class PelangganController extends BaseController {
         $this->redirect('/pelanggan/booking/' . $bookingId . '/hotel');
     }
 
-    // GET /pelanggan/booking
     public function bookingList(): void {
         $this->view('pelanggan/booking', [
             'title'    => 'Riwayat Booking',
@@ -189,17 +180,14 @@ class PelangganController extends BaseController {
         ]);
     }
 
-    // GET /pelanggan/booking/:id/download
     public function downloadTiket(string $id): void {
         $booking = $this->bookingModel->findById((int) $id);
 
-        // Pastikan booking milik user yang sedang login
         if (!$booking || (int) $booking['user_id'] !== (int) $_SESSION['user_id']) {
             $this->flash('danger', 'Akses ditolak.');
             $this->redirect('/pelanggan/booking');
         }
 
-        // Buat PDF jika belum ada
         if (empty($booking['pdf_path']) || !file_exists(TICKET_PATH . '/' . $booking['pdf_path'])) {
             $this->generatePdfTiket((int) $id);
             $booking = $this->bookingModel->findById((int) $id);
@@ -211,7 +199,6 @@ class PelangganController extends BaseController {
             $this->redirect('/pelanggan/booking');
         }
 
-        // Stream PDF sebagai download
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="tiket-' . $booking['kode_booking'] . '.pdf"');
         header('Content-Length: ' . filesize($filePath));
@@ -219,35 +206,25 @@ class PelangganController extends BaseController {
         exit;
     }
 
-    // ================================================================
-    //  INTEGRASI API: Aviationstack
-    // ================================================================
-    /**
-     * Mapping nama destinasi paket wisata ke kode bandara IATA.
-     */
     private function getKodeBandara(string $destinasi): ?string {
         $kota = strtolower(trim(explode(',', $destinasi)[0]));
 
         $map = [
-            'bali'         => 'DPS',
-            'raja ampat'   => 'SOQ',
-            'yogyakarta'   => 'JOG',
-            'labuan bajo'  => 'LBJ',
-            'lombok'       => 'LOP',
-            'malang'       => 'MLG',
-            'bandung'      => 'BDO',
-            'medan'        => 'KNO',
-            'makassar'     => 'UPG',
-            'belitung'     => 'TJQ',
+            'bali'        => 'DPS',
+            'raja ampat'  => 'SOQ',
+            'yogyakarta'  => 'JOG',
+            'labuan bajo' => 'LBJ',
+            'lombok'      => 'LOP',
+            'malang'      => 'MLG',
+            'bandung'     => 'BDO',
+            'medan'       => 'KNO',
+            'makassar'    => 'UPG',
+            'belitung'    => 'TJQ',
         ];
 
         return $map[$kota] ?? null;
     }
 
-    /**
-     * Ambil info penerbangan ke bandara destinasi via Aviationstack API.
-     * Endpoint: http://api.aviationstack.com/v1/flights
-     */
     private function getInfoPenerbangan(string $destinasi): ?array {
         $kodeBandara = $this->getKodeBandara($destinasi);
         if (!$kodeBandara) {
@@ -305,32 +282,16 @@ class PelangganController extends BaseController {
         ];
     }
 
-    // ================================================================
-    //  PDF TIKET GENERATOR (Sederhana, tanpa library eksternal)
-    //  Untuk production: gunakan TCPDF atau DomPDF
-    // ================================================================
     private function generatePdfTiket(int $bookingId): void {
         $booking = $this->bookingModel->findById($bookingId);
         if (!$booking) return;
 
-        $filename = 'tiket-' . $booking['kode_booking'] . '-' . time() . '.pdf';
-        $filePath = TICKET_PATH . '/' . $filename;
-
-        // Buat PDF sederhana dengan konten raw (gunakan TCPDF di production)
-        // Ini adalah placeholder — install TCPDF via Composer untuk PDF real
+        $filename    = 'tiket-' . $booking['kode_booking'] . '-' . time() . '.pdf';
+        $filePath    = TICKET_PATH . '/' . $filename;
         $htmlContent = $this->buildTiketHtml($booking);
 
-        // Simpan sebagai HTML sementara (ganti dengan PDF library di production)
         $htmlFile = TICKET_PATH . '/' . str_replace('.pdf', '.html', $filename);
         file_put_contents($htmlFile, $htmlContent);
-
-        // Di production dengan TCPDF:
-        // require_once ROOT_PATH . '/vendor/autoload.php';
-        // $pdf = new TCPDF();
-        // $pdf->writeHTML($htmlContent);
-        // $pdf->Output($filePath, 'F');
-
-        // Untuk demo: simpan sebagai .html dan rename .pdf
         rename($htmlFile, $filePath);
 
         $this->bookingModel->savePdfPath($bookingId, $filename);

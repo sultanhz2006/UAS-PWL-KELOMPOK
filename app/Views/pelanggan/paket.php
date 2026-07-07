@@ -15,12 +15,12 @@ $sortOptions = [
 ];
 ?>
 <div class="mb-4">
-    <h5 style="font-weight:700;color:#1A2B3C">Paket Wisata</h5>
+    <h5 class="fw-700 mb-0">Paket Wisata</h5>
     <!-- Search & Filter -->
     <form method="GET" action="<?= BASE_URL ?>/pelanggan/paket" class="stat-card p-3 mt-3">
         <div class="row g-2 align-items-end">
             <div class="col-md-5">
-                <label class="form-label" style="font-size:.8rem;color:#64748B">Cari Paket</label>
+                <label class="form-label fs-8 text-secondary-soft">Cari Paket</label>
                 <div class="input-group">
                     <span class="input-group-text bg-white border-end-0">
                         <i class="bi bi-search text-muted"></i>
@@ -31,7 +31,7 @@ $sortOptions = [
                 </div>
             </div>
             <div class="col-md-3">
-                <label class="form-label" style="font-size:.8rem;color:#64748B">Destinasi</label>
+                <label class="form-label fs-8 text-secondary-soft">Destinasi</label>
                 <select name="destinasi" class="form-select">
                     <option value="">Semua destinasi</option>
                     <?php foreach ($destinasis as $d): ?>
@@ -42,7 +42,7 @@ $sortOptions = [
                 </select>
             </div>
             <div class="col-md-3">
-                <label class="form-label" style="font-size:.8rem;color:#64748B">Urutkan</label>
+                <label class="form-label fs-8 text-secondary-soft">Urutkan</label>
                 <select name="sort" class="form-select">
                     <?php foreach ($sortOptions as $value => $label): ?>
                     <option value="<?= $value ?>" <?= ($sort ?: 'terbaru') === $value ? 'selected' : '' ?>>
@@ -59,7 +59,7 @@ $sortOptions = [
         </div>
         <?php if ($hasFilter): ?>
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-3 pt-3 border-top">
-            <div class="text-muted" style="font-size:.82rem">
+            <div class="text-muted fs-82">
                 Menampilkan <?= count($pakets) ?> paket sesuai filter.
             </div>
             <a href="<?= BASE_URL ?>/pelanggan/paket" class="btn btn-sm btn-outline-secondary rounded-3">
@@ -72,7 +72,7 @@ $sortOptions = [
 
 <?php if (empty($pakets)): ?>
 <div class="text-center py-5">
-    <i class="bi bi-emoji-frown" style="font-size:3rem;color:#CBD5E1"></i>
+    <i class="bi bi-emoji-frown fs-3rem text-muted"></i>
     <p class="text-muted mt-2">Tidak ada paket wisata yang cocok dengan filter.</p>
     <a href="<?= BASE_URL ?>/pelanggan/paket" class="btn btn-outline-primary rounded-3 mt-1">Reset Filter</a>
 </div>
@@ -80,41 +80,36 @@ $sortOptions = [
 <div class="row g-4">
     <?php foreach ($pakets as $p): ?>
     <div class="col-md-6 col-xl-4">
-        <div class="stat-card p-0 overflow-hidden h-100 d-flex flex-column"
-             style="transition:transform .2s,box-shadow .2s;cursor:pointer"
-             onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(0,0,0,.1)'"
-             onmouseout="this.style.transform='';this.style.boxShadow=''"
+        <div class="stat-card paket-card h-100 d-flex flex-column"
              onclick="location.href='<?= BASE_URL ?>/pelanggan/paket/<?= $p['id'] ?>'">
             <?php if ($p['foto']): ?>
             <img src="<?= BASE_URL ?>/uploads/paket/<?= htmlspecialchars($p['foto']) ?>"
                  alt="<?= htmlspecialchars($p['nama_paket']) ?>"
-                 style="width:100%;height:200px;object-fit:cover">
+                 class="img-cover-200">
             <?php else: ?>
-            <div style="width:100%;height:200px;background:linear-gradient(135deg,#0A6CFF,#06B6D4);
-                        display:flex;align-items:center;justify-content:center;color:#fff;font-size:3rem">
+            <div class="img-cover-200 bg-gradient-primary-alt d-flex align-items-center justify-content-center text-white fs-4rem">
                 <i class="bi bi-airplane"></i>
             </div>
             <?php endif; ?>
             <div class="p-4 d-flex flex-column flex-fill">
                 <div class="d-flex justify-content-between align-items-start mb-2">
-                    <h6 style="font-weight:700;color:#1A2B3C;margin:0"><?= htmlspecialchars($p['nama_paket']) ?></h6>
-                    <span class="badge bg-primary-subtle text-primary rounded-pill ms-2" style="white-space:nowrap;font-size:.73rem">
+                    <h6 class="fw-700 mb-0"><?= htmlspecialchars($p['nama_paket']) ?></h6>
+                    <span class="badge bg-primary-subtle text-primary rounded-pill ms-2 fs-73">
                         <?= $p['durasi_hari'] ?> Hari
                     </span>
                 </div>
-                <div class="text-muted mb-2" style="font-size:.82rem">
+                <div class="text-muted mb-2 fs-82">
                     <i class="bi bi-geo-alt-fill text-primary me-1"></i><?= htmlspecialchars($p['destinasi']) ?>
                 </div>
-                <p class="text-muted mb-3 flex-fill" style="font-size:.82rem;line-height:1.5;
-                   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-clamp:2">
+                <p class="text-muted mb-3 flex-fill fs-82 line-clamp-2">
                     <?= htmlspecialchars($p['deskripsi'] ?? '') ?>
                 </p>
                 <div class="d-flex justify-content-between align-items-center mt-auto">
                     <div>
-                        <div style="font-size:1.15rem;font-weight:800;color:#0A6CFF">
+                        <div class="fs-115 fw-800 text-primary">
                             Rp <?= number_format($p['harga'], 0, ',', '.') ?>
                         </div>
-                        <div class="text-muted" style="font-size:.72rem">/orang</div>
+                        <div class="text-muted fs-72">/orang</div>
                     </div>
                     <span class="btn btn-primary btn-sm rounded-3 px-3">Lihat Detail</span>
                 </div>

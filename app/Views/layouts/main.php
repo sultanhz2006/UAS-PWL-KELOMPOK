@@ -26,7 +26,198 @@
         body {
             font-family: 'Inter', sans-serif;
             background: #F4F7FB;
+            color: #1A2B3C;
             min-height: 100vh;
+        }
+        body.dark-mode {
+            background: #090b0f;
+            color: #e2e8f0;
+        }
+        body.dark-mode #sidebar {
+            background: #111827;
+        }
+        body.dark-mode .nav-link-item {
+            color: #cbd5e1;
+        }
+        body.dark-mode .nav-link-item:hover {
+            color: #fff;
+            background: rgba(255,255,255,.08);
+        }
+        body.dark-mode .nav-link-item.active {
+            color: #fff;
+            background: rgba(96,165,250,.2);
+        }
+        body.dark-mode .nav-link-item.active::before {
+            background: #60a5fa;
+        }
+        body.dark-mode .sidebar-footer {
+            border-top-color: rgba(148,163,184,.15);
+            color: #cbd5e1;
+        }
+        body.dark-mode .sidebar-footer .user-name {
+            color: #fff;
+        }
+        body.dark-mode .topbar {
+            background: #111827;
+            border-color: rgba(148,163,184,.15);
+        }
+        body.dark-mode .topbar-title {
+            color: #f8fafc;
+        }
+        body.dark-mode .btn-logout {
+            color: #e2e8f0;
+            border-color: rgba(148,163,184,.2);
+            background: #1f2937;
+        }
+        body.dark-mode .btn-logout:hover {
+            background: #374151;
+            color: #fff;
+        }
+        body.dark-mode .page-body,
+        body.dark-mode .stat-card,
+        body.dark-mode .paket-card {
+            background: #111827;
+            border-color: rgba(255,255,255,.08);
+            color: #e2e8f0;
+        }
+        body.dark-mode .stat-card .stat-value,
+        body.dark-mode .stat-card .stat-label,
+        body.dark-mode .stat-card code {
+            color: #e2e8f0;
+        }
+        body.dark-mode .stat-card .stat-label,
+        body.dark-mode .flash-container .alert {
+            color: #cbd5e1;
+        }
+        body.dark-mode .flash-container .alert {
+            background: rgba(15,23,42,.98);
+            border-color: rgba(148,163,184,.1);
+        }
+        body.dark-mode .form-control,
+        body.dark-mode .form-select {
+            background: #0f172a;
+            border-color: rgba(148,163,184,.2);
+            color: #e2e8f0;
+        }
+        body.dark-mode .form-control:focus,
+        body.dark-mode .form-select:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 0.2rem rgba(96,165,250,.25);
+        }
+        body.dark-mode .btn-outline-secondary {
+            color: #e2e8f0;
+            border-color: rgba(148,163,184,.25);
+        }
+        body.dark-mode .btn-outline-secondary:hover {
+            background: rgba(96,165,250,.12);
+            color: #fff;
+        }
+        body.dark-mode .table,
+        body.dark-mode .table-responsive,
+        body.dark-mode .table-responsive table {
+            color: #e2e8f0;
+        }
+        body.dark-mode .table th,
+        body.dark-mode .table td,
+        body.dark-mode .table thead th,
+        body.dark-mode .table tbody td {
+            background: #0f172a;
+            border-color: rgba(148,163,184,.2);
+            color: #e2e8f0;
+        }
+        body.dark-mode .table thead th {
+            background: #111827;
+            color: #e2e8f0;
+        }
+        body.dark-mode .table-hover tbody tr:hover {
+            background: rgba(96,165,250,.12);
+        }
+        body.dark-mode .table thead th,
+        body.dark-mode .table tbody tr {
+            border-color: rgba(148,163,184,.15);
+        }
+        body.dark-mode .text-muted {
+            color: #94a3b8 !important;
+        }
+        body.dark-mode h5[style],
+        body.dark-mode h6[style],
+        body.dark-mode p[style],
+        body.dark-mode strong[style],
+        body.dark-mode div[style*="color:#1A2B3C"],
+        body.dark-mode div[style*="color:#64748B"],
+        body.dark-mode span[style*="color:#0A6CFF"],
+        body.dark-mode code[style],
+        body.dark-mode th[style],
+        body.dark-mode td[style] {
+            color: #e2e8f0 !important;
+        }
+        body.dark-mode .table thead th[style],
+        body.dark-mode .table thead[style] {
+            background: #111827 !important;
+        }
+        body.dark-mode [style*="color:"] {
+            color: #e2e8f0 !important;
+        }
+        body.dark-mode [style*="background:"] {
+            background: none !important;
+            background-color: transparent !important;
+            background-image: none !important;
+        }
+        body.dark-mode .bg-white,
+        body.dark-mode .bg-light,
+        body.dark-mode .bg-primary-subtle,
+        body.dark-mode .bg-warning-subtle,
+        body.dark-mode .bg-secondary,
+        body.dark-mode .bg-info,
+        body.dark-mode .bg-success,
+        body.dark-mode .bg-danger {
+            background-color: #111827 !important;
+            color: #e2e8f0 !important;
+            border-color: rgba(148,163,184,.12) !important;
+        }
+        body.dark-mode .badge.bg-primary-subtle,
+        body.dark-mode .badge.bg-warning-subtle,
+        body.dark-mode .badge.bg-secondary,
+        body.dark-mode .badge.bg-info,
+        body.dark-mode .badge.bg-success,
+        body.dark-mode .badge.bg-danger,
+        body.dark-mode .badge.bg-light {
+            background-color: rgba(148,163,184,.16) !important;
+            color: #e2e8f0 !important;
+        }
+        body.dark-mode .alert.alert-info,
+        body.dark-mode .alert.alert-warning,
+        body.dark-mode .alert.alert-danger,
+        body.dark-mode .alert.alert-success,
+        body.dark-mode .alert.alert-secondary {
+            background-color: #111827 !important;
+            color: #e2e8f0 !important;
+            border-color: rgba(148,163,184,.14) !important;
+        }
+        body.dark-mode .text-primary,
+        body.dark-mode .text-warning,
+        body.dark-mode .text-success,
+        body.dark-mode .text-info,
+        body.dark-mode .text-danger,
+        body.dark-mode .text-secondary,
+        body.dark-mode .text-muted {
+            color: inherit !important;
+        }
+        body.dark-mode .badge {
+            color: #e2e8f0 !important;
+        }
+        body.dark-mode .btn-outline-primary,
+        body.dark-mode .btn-outline-success,
+        body.dark-mode .btn-outline-warning,
+        body.dark-mode .btn-outline-danger {
+            color: #e2e8f0 !important;
+        }
+        body.dark-mode .table-responsive table {
+            background: #0f172a !important;
+        }
+        body.dark-mode .table th,
+        body.dark-mode .table td {
+            background: #0f172a !important;
         }
 
         /* ---- Sidebar ---- */
@@ -139,9 +330,70 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 1.4rem; margin-bottom: 14px;
         }
-        .stat-card .stat-value { font-size: 1.9rem; font-weight: 700; color: #1A2B3C; }
-        .stat-card .stat-label { font-size: .8rem; color: #64748B; font-weight: 500; }
+        .stat-card .stat-value { font-size: 1.9rem; font-weight: 700; color: inherit; }
+        .stat-card .stat-label { font-size: .8rem; color: inherit; font-weight: 500; }
         .stat-card code { font-size: .85rem; }
+        .fs-3rem { font-size: 3rem !important; }
+        .fs-4rem { font-size: 4rem !important; }
+        .fs-2-5 { font-size: 2.5rem !important; }
+        .fs-18 { font-size: 1.8rem !important; }
+        .fs-15 { font-size: 1.5rem !important; }
+        .fs-115 { font-size: 1.15rem !important; }
+        .fs-125 { font-size: 1.25rem !important; }
+        .fs-105 { font-size: 1.05rem !important; }
+        .fs-93 { font-size: .93rem !important; }
+        .fs-92 { font-size: .92rem !important; }
+        .fs-875 { font-size: .875rem !important; }
+        .fs-85 { font-size: .85rem !important; }
+        .fs-82 { font-size: .82rem !important; }
+        .fs-8 { font-size: .8rem !important; }
+        .fs-78 { font-size: .78rem !important; }
+        .fs-75 { font-size: .75rem !important; }
+        .fs-73 { font-size: .73rem !important; }
+        .fs-72 { font-size: .72rem !important; }
+        .fw-800 { font-weight: 800 !important; }
+        .fw-700 { font-weight: 700 !important; }
+        .fw-600 { font-weight: 600 !important; }
+        .fw-500 { font-weight: 500 !important; }
+        .lh-17 { line-height: 1.7 !important; }
+        .lh-15 { line-height: 1.5 !important; }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .bg-soft { background-color: #F0F9FF !important; }
+        .text-secondary-soft { color: #64748B !important; }
+        .text-muted-soft { color: #94A3B8 !important; }
+        .btn-sm-xs { font-size: .75rem !important; }
+        .img-cover-180,
+        .img-cover-200,
+        .img-cover-300 {
+            width: 100%;
+            object-fit: cover;
+        }
+        .img-cover-180 { height: 180px; }
+        .img-cover-200 { height: 200px; }
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #0A6CFF, #0052CC);
+        }
+        .bg-gradient-primary-alt {
+            background: linear-gradient(135deg, #0A6CFF, #06B6D4);
+        }
+        .card-hoverable {
+            transition: transform .2s, box-shadow .2s;
+            cursor: pointer;
+        }
+        .card-hoverable:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,.1);
+        }
+        .sticky-top-80 {
+            position: sticky;
+            top: 80px;
+        }
+        .min-h-46 { min-height: 46px; }
         @media (max-width: 991.98px) {
             .stat-card code {
                 font-size: 0.7rem !important;
@@ -364,9 +616,14 @@
             </button>
             <span class="topbar-title"><?= htmlspecialchars($title ?? APP_NAME) ?></span>
         </div>
-        <a href="<?= BASE_URL ?>/logout" class="btn-logout">
-            <i class="bi bi-box-arrow-right me-1"></i>Logout
-        </a>
+        <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-outline-secondary btn-sm" id="darkModeToggle" type="button" aria-label="Toggle dark mode">
+                <i class="bi bi-moon-stars"></i>
+            </button>
+            <a href="<?= BASE_URL ?>/logout" class="btn-logout">
+                <i class="bi bi-box-arrow-right me-1"></i>Logout
+            </a>
+        </div>
     </div>
 
     <!-- Flash Messages -->
@@ -410,6 +667,28 @@ document.querySelectorAll('.nav-link-item').forEach(link => {
         }
     });
 });
+
+function applyTheme(theme) {
+    const isDark = theme === 'dark';
+    document.body.classList.toggle('dark-mode', isDark);
+    const icon = document.getElementById('darkModeToggle').querySelector('i');
+    icon.className = isDark ? 'bi bi-sun' : 'bi bi-moon-stars';
+}
+
+function loadTheme() {
+    const stored = localStorage.getItem('vyantravel_theme');
+    const theme = stored || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme(theme);
+}
+
+const darkModeToggle = document.getElementById('darkModeToggle');
+darkModeToggle.addEventListener('click', () => {
+    const isDark = !document.body.classList.contains('dark-mode');
+    applyTheme(isDark ? 'dark' : 'light');
+    localStorage.setItem('vyantravel_theme', isDark ? 'dark' : 'light');
+});
+
+loadTheme();
 
 // Auto-dismiss flash messages
 setTimeout(() => {

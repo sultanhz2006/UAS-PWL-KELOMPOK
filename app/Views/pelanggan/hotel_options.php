@@ -1,12 +1,12 @@
 <!-- app/Views/pelanggan/hotel_options.php -->
 <div class="mb-4">
-    <a href="<?= BASE_URL ?>/pelanggan/booking" class="text-decoration-none text-muted" style="font-size:.85rem">
+    <a href="<?= BASE_URL ?>/pelanggan/booking" class="text-decoration-none text-muted fs-85">
         <i class="bi bi-arrow-left me-1"></i>Kembali ke riwayat booking
     </a>
 </div>
 
 <?php if (empty($booking)): ?>
-<div class="alert alert-warning py-2" style="font-size:.82rem">
+<div class="alert alert-warning py-2 fs-82">
     Data booking tidak tersedia. Silakan kembali ke <a href="<?= BASE_URL ?>/pelanggan/booking" class="text-decoration-none">riwayat booking</a>.
 </div>
 <?php return; ?>
@@ -14,8 +14,8 @@
 
 <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
     <div>
-        <h5 style="font-weight:700;color:#1A2B3C;margin:0">Pilih Penginapan</h5>
-        <p class="text-muted mb-0" style="font-size:.85rem">
+        <h5 class="fw-700 mb-0">Pilih Penginapan</h5>
+        <p class="text-muted mb-0 fs-85">
             Booking <?= htmlspecialchars($booking['kode_booking']) ?> -
             <?= htmlspecialchars($booking['destinasi']) ?>
         </p>
@@ -25,7 +25,7 @@
     </a>
 </div>
 
-<div class="alert alert-info py-2" style="font-size:.82rem">
+<div class="alert alert-info py-2 fs-82">
     <i class="bi bi-info-circle me-1"></i>
     Pencarian hotel menggunakan integrasi live Booking.com via RapidAPI.
 </div>
@@ -35,8 +35,8 @@
 <div class="stat-card mb-4">
     <div class="d-flex justify-content-between flex-wrap gap-2">
         <div>
-            <h6 style="font-weight:700;color:#1A2B3C;margin:0">Hotel sudah dipesan</h6>
-            <p class="text-muted mb-0" style="font-size:.85rem">
+            <h6 class="fw-700 mb-0">Hotel sudah dipesan</h6>
+            <p class="text-muted mb-0 fs-85">
                 <?= htmlspecialchars($hotelBooking['kode_hotel_booking']) ?> -
                 <?= htmlspecialchars($hotelBooking['nama_hotel']) ?>
             </p>
@@ -46,7 +46,7 @@
         </span>
     </div>
     <hr>
-    <div class="row g-3" style="font-size:.85rem">
+    <div class="row g-3 fs-85">
         <div class="col-md-3">
             <div class="text-muted">Check-in</div>
             <strong><?= date('d M Y', strtotime($hotelBooking['check_in'])) ?></strong>
@@ -69,9 +69,9 @@
 
 <?php if (empty($hotels)): ?>
 <div class="stat-card text-center py-5">
-    <i class="bi bi-building-x" style="font-size:3rem;color:#CBD5E1;display:block;margin-bottom:12px"></i>
-    <h6 style="color:#64748B">Belum ada hotel untuk destinasi ini</h6>
-    <p class="text-muted" style="font-size:.85rem">Kamu bisa lanjut tanpa penginapan.</p>
+    <i class="bi bi-building-x fs-3rem text-secondary-soft d-block mb-3"></i>
+    <h6 class="text-secondary-soft">Belum ada hotel untuk destinasi ini</h6>
+    <p class="text-muted fs-85">Kamu bisa lanjut tanpa penginapan.</p>
 </div>
 <?php else: ?>
 <div class="row g-4">
@@ -80,10 +80,10 @@
         <div class="stat-card h-100">
             <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
                 <div>
-                    <h6 style="font-weight:700;color:#1A2B3C;margin:0">
+                    <h6 class="fw-700 mb-0">
                         <?= htmlspecialchars($hotel['nama_hotel']) ?>
                     </h6>
-                    <div class="text-muted" style="font-size:.8rem">
+                    <div class="text-muted fs-8">
                         <i class="bi bi-geo-alt me-1"></i><?= htmlspecialchars($hotel['alamat']) ?>
                     </div>
                 </div>
@@ -91,15 +91,15 @@
                     <?= (int) $hotel['bintang'] ?> <i class="bi bi-star-fill"></i>
                 </span>
             </div>
-            <p style="font-size:.85rem;color:#64748B;min-height:46px">
+            <p class="fs-85 text-secondary-soft min-h-46">
                 <?= htmlspecialchars($hotel['deskripsi']) ?>
             </p>
             <div class="mb-3">
-                <div class="text-muted" style="font-size:.75rem">Mulai dari</div>
-                <div style="font-size:1.25rem;font-weight:800;color:#0A6CFF">
+                <div class="text-muted fs-75">Mulai dari</div>
+                <div class="fs-125 fw-800 text-primary">
                     Rp <?= number_format($hotel['harga_per_malam'], 0, ',', '.') ?>
                 </div>
-                <div class="text-muted" style="font-size:.75rem">/malam</div>
+                <div class="text-muted fs-75">/malam</div>
             </div>
 
             <?php if (!$hotelBooking): ?>
@@ -108,27 +108,27 @@
                 <input type="hidden" name="hotel_id" value="<?= $hotel['id'] ?>">
                 <div class="row g-2">
                     <div class="col-6">
-                        <label class="form-label" style="font-size:.78rem">Check-in</label>
+                        <label class="form-label fs-78">Check-in</label>
                         <input type="date" name="check_in" class="form-control form-control-sm"
                                min="<?= date('Y-m-d') ?>"
                                value="<?= htmlspecialchars($booking['tanggal_berangkat']) ?>" required>
                     </div>
                     <div class="col-6">
-                        <label class="form-label" style="font-size:.78rem">Check-out</label>
+                        <label class="form-label fs-78">Check-out</label>
                         <input type="date" name="check_out" class="form-control form-control-sm"
                                min="<?= date('Y-m-d', strtotime('+1 day')) ?>"
                                value="<?= date('Y-m-d', strtotime($booking['tanggal_berangkat'] . ' +' . (int) $booking['durasi_hari'] . ' days')) ?>" required>
                     </div>
                     <div class="col-6">
-                        <label class="form-label" style="font-size:.78rem">Kamar</label>
+                        <label class="form-label fs-78">Kamar</label>
                         <input type="number" name="jumlah_kamar" class="form-control form-control-sm" min="1" value="1" required>
                     </div>
                     <div class="col-6">
-                        <label class="form-label" style="font-size:.78rem">Tamu</label>
+                        <label class="form-label fs-78">Tamu</label>
                         <input type="number" name="jumlah_tamu" class="form-control form-control-sm" min="1" value="<?= (int) $booking['jumlah_peserta'] ?>" required>
                     </div>
                     <div class="col-12">
-                        <label class="form-label" style="font-size:.78rem">Catatan</label>
+                        <label class="form-label fs-78">Catatan</label>
                         <textarea name="catatan" class="form-control form-control-sm" rows="2" placeholder="Opsional"></textarea>
                     </div>
                 </div>

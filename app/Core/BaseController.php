@@ -1,5 +1,4 @@
 <?php
-// app/Core/BaseController.php
 
 abstract class BaseController {
 

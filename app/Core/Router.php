@@ -1,5 +1,4 @@
 <?php
-// app/Core/Router.php
 
 class Router {
     private array $routes = [];
@@ -47,7 +46,7 @@ class Router {
 
         $this->abort(404, "Halaman tidak ditemukan.");
     }
-    
+
     private function abort(int $code, string $msg): void {
         http_response_code($code);
         $viewFile = APP_PATH . "/Views/errors/{$code}.php";

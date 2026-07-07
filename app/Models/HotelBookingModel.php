@@ -1,5 +1,4 @@
 <?php
-// app/Models/HotelBookingModel.php
 
 require_once ROOT_PATH . '/config/Database.php';
 

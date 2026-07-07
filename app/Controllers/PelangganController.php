@@ -1,5 +1,4 @@
 <?php
-// app/Controllers/PelangganController.php
 
 require_once APP_PATH . '/Core/BaseController.php';
 require_once APP_PATH . '/Models/PaketWisataModel.php';
@@ -33,20 +32,15 @@ class PelangganController extends BaseController {
 
     // GET /pelanggan/paket
     public function paketList(): void {
-        $filters = [
-            'keyword'   => trim($_GET['q'] ?? ''),
-            'destinasi' => trim($_GET['destinasi'] ?? ''),
-            'sort'      => trim($_GET['sort'] ?? ''),
-        ];
+        $keyword = trim($_GET['q'] ?? '');
+        $pakets  = $keyword
+            ? $this->paketModel->search($keyword)
+            : $this->paketModel->getAll('aktif');
 
         $this->view('pelanggan/paket', [
-            'title'      => 'Paket Wisata',
-            'pakets'     => $this->paketModel->filterActive($filters),
-            'filters'    => $filters,
-            'keyword'    => $filters['keyword'],
-            'destinasi'  => $filters['destinasi'],
-            'sort'       => $filters['sort'],
-            'destinasis' => $this->paketModel->getActiveDestinations(),
+            'title'   => 'Paket Wisata',
+            'pakets'  => $pakets,
+            'keyword' => $keyword,
         ]);
     }
 

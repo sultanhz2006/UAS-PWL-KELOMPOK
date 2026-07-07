@@ -1,4 +1,3 @@
-<!-- app/Views/admin/paket/index.php -->
 <?php $pakets = $pakets ?? []; ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>

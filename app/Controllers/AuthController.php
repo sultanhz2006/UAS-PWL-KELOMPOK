@@ -1,5 +1,4 @@
 <?php
-// app/Controllers/AuthController.php
 
 require_once APP_PATH . '/Core/BaseController.php';
 require_once APP_PATH . '/Models/UserModel.php';

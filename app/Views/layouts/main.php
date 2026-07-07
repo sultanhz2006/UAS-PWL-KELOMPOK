@@ -220,7 +220,7 @@
 
     <!-- Page Content -->
     <div class="page-body">
-        <?= $content ?>
+        <?= isset($content) ? $content : '' ?>
     </div>
 </div><!-- /main-content -->
 

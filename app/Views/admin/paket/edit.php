@@ -1,4 +1,3 @@
-<!-- app/Views/admin/paket/edit.php -->
 <?php
 $paket = $paket ?? [
     'id' => '',

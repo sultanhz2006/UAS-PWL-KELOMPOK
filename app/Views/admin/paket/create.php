@@ -1,4 +1,3 @@
-<!-- app/Views/admin/paket/create.php -->
 <div class="mb-4">
     <a href="<?= BASE_URL ?>/admin/paket" class="text-decoration-none text-muted" style="font-size:.85rem">
         <i class="bi bi-arrow-left me-1"></i>Kembali ke daftar paket

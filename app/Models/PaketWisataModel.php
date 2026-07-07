@@ -1,5 +1,4 @@
 <?php
-// app/Models/PaketWisataModel.php
 
 require_once ROOT_PATH . '/config/Database.php';
 
@@ -119,55 +118,10 @@ class PaketWisataModel {
         $stmt = $this->db->prepare(
             "SELECT * FROM paket_wisata
               WHERE status = 'aktif'
-                AND (nama_paket LIKE :kw_nama OR destinasi LIKE :kw_destinasi)
+                AND (nama_paket LIKE :kw OR destinasi LIKE :kw)
               ORDER BY nama_paket"
         );
-        $stmt->execute([
-            ':kw_nama'      => "%{$keyword}%",
-            ':kw_destinasi' => "%{$keyword}%",
-        ]);
-        return $stmt->fetchAll();
-    }
-
-    /** Ambil daftar destinasi paket aktif untuk filter pelanggan. */
-    public function getActiveDestinations(): array {
-        $stmt = $this->db->query(
-            "SELECT DISTINCT destinasi
-               FROM paket_wisata
-              WHERE status = 'aktif' AND destinasi IS NOT NULL AND destinasi <> ''
-              ORDER BY destinasi ASC"
-        );
-
-        return $stmt->fetchAll(PDO::FETCH_COLUMN);
-    }
-
-    /** Filter paket aktif berdasarkan keyword, destinasi, dan urutan. */
-    public function filterActive(array $filters = []): array {
-        $sql = "SELECT * FROM paket_wisata WHERE status = 'aktif'";
-        $params = [];
-
-        if (!empty($filters['keyword'])) {
-            $sql .= " AND (nama_paket LIKE :kw_nama OR destinasi LIKE :kw_destinasi)";
-            $params[':kw_nama'] = '%' . $filters['keyword'] . '%';
-            $params[':kw_destinasi'] = '%' . $filters['keyword'] . '%';
-        }
-
-        if (!empty($filters['destinasi'])) {
-            $sql .= " AND destinasi = :destinasi";
-            $params[':destinasi'] = $filters['destinasi'];
-        }
-
-        $orderBy = match ($filters['sort'] ?? '') {
-            'harga_asc'  => 'harga ASC',
-            'harga_desc' => 'harga DESC',
-            'durasi_asc' => 'durasi_hari ASC',
-            'durasi_desc'=> 'durasi_hari DESC',
-            default      => 'created_at DESC',
-        };
-
-        $stmt = $this->db->prepare($sql . " ORDER BY {$orderBy}");
-        $stmt->execute($params);
-
+        $stmt->execute([':kw' => "%{$keyword}%"]);
         return $stmt->fetchAll();
     }
 }

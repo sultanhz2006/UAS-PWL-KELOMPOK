@@ -4,6 +4,7 @@ $keyword    = $keyword ?? '';
 $destinasi  = $destinasi ?? '';
 $sort       = $sort ?? '';
 $destinasis = $destinasis ?? [];
+$pakets     = $pakets ?? [];
 $hasFilter  = $keyword !== '' || $destinasi !== '' || $sort !== '';
 $sortOptions = [
     'terbaru'      => 'Terbaru',

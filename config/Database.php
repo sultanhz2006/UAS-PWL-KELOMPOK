@@ -1,5 +1,4 @@
 <?php
-// config/Database.php
 
 class Database {
     private static ?PDO $instance = null;

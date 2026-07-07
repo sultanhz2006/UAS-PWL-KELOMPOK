@@ -1,5 +1,4 @@
 <?php
-// app/Models/HotelModel.php
 
 require_once ROOT_PATH . '/config/Database.php';
 require_once ROOT_PATH . '/api_keys/api_keys.php';

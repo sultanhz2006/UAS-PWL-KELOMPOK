@@ -175,15 +175,47 @@
             color: #e2e8f0 !important;
             border-color: rgba(148,163,184,.12) !important;
         }
-        body.dark-mode .badge.bg-primary-subtle,
+        body.dark-mode .badge.bg-success-subtle,
+        body.dark-mode .badge.bg-success {
+            background-color: rgba(52,211,153,.15) !important;
+            color: #34d399 !important;
+            border: 1px solid rgba(52,211,153,.25) !important;
+        }
+        body.dark-mode .badge.bg-danger-subtle,
+        body.dark-mode .badge.bg-danger {
+            background-color: rgba(248,113,113,.15) !important;
+            color: #f87171 !important;
+            border: 1px solid rgba(248,113,113,.25) !important;
+        }
         body.dark-mode .badge.bg-warning-subtle,
-        body.dark-mode .badge.bg-secondary,
-        body.dark-mode .badge.bg-info,
-        body.dark-mode .badge.bg-success,
-        body.dark-mode .badge.bg-danger,
+        body.dark-mode .badge.bg-warning {
+            background-color: rgba(251,191,36,.15) !important;
+            color: #fbbf24 !important;
+            border: 1px solid rgba(251,191,36,.25) !important;
+        }
+        body.dark-mode .badge.bg-primary-subtle,
+        body.dark-mode .badge.bg-primary {
+            background-color: rgba(96,165,250,.15) !important;
+            color: #60a5fa !important;
+            border: 1px solid rgba(96,165,250,.25) !important;
+        }
+        body.dark-mode .badge.bg-secondary-subtle,
+        body.dark-mode .badge.bg-secondary {
+            background-color: rgba(148,163,184,.15) !important;
+            color: #cbd5e1 !important;
+            border: 1px solid rgba(148,163,184,.25) !important;
+        }
+        body.dark-mode .badge.bg-info-subtle,
+        body.dark-mode .badge.bg-info {
+            background-color: rgba(34,211,238,.15) !important;
+            color: #22d3ee !important;
+            border: 1px solid rgba(34,211,238,.25) !important;
+        }
+        body.dark-mode .badge.bg-light-subtle,
         body.dark-mode .badge.bg-light {
-            background-color: rgba(148,163,184,.16) !important;
-            color: #e2e8f0 !important;
+            background-color: rgba(248,249,250,.10) !important;
+            color: #f8f9fa !important;
+            border: 1px solid rgba(248,249,250,.15) !important;
         }
         body.dark-mode .alert.alert-info,
         body.dark-mode .alert.alert-warning,
@@ -194,17 +226,28 @@
             color: #e2e8f0 !important;
             border-color: rgba(148,163,184,.14) !important;
         }
-        body.dark-mode .text-primary,
-        body.dark-mode .text-warning,
-        body.dark-mode .text-success,
-        body.dark-mode .text-info,
-        body.dark-mode .text-danger,
-        body.dark-mode .text-secondary,
-        body.dark-mode .text-muted {
-            color: inherit !important;
+        body.dark-mode .text-primary  { color: #60a5fa !important; }
+        body.dark-mode .text-success  { color: #34d399 !important; }
+        body.dark-mode .text-warning  { color: #fbbf24 !important; }
+        body.dark-mode .text-danger   { color: #f87171 !important; }
+        body.dark-mode .text-info     { color: #22d3ee !important; }
+        body.dark-mode .text-secondary{ color: #cbd5e1 !important; }
+        body.dark-mode .text-muted    { color: #94a3b8 !important; }
+        body.dark-mode .badge         { color: #cbd5e1; }
+        /* ---- Progress bars ---- */
+        body.dark-mode .progress {
+            background-color: rgba(148,163,184,.15) !important;
         }
-        body.dark-mode .badge {
-            color: #e2e8f0 !important;
+        body.dark-mode .progress-bar.bg-warning  { background-color: #fbbf24 !important; }
+        body.dark-mode .progress-bar.bg-success  { background-color: #34d399 !important; }
+        body.dark-mode .progress-bar.bg-danger   { background-color: #f87171 !important; }
+        body.dark-mode .progress-bar.bg-primary  { background-color: #60a5fa !important; }
+        body.dark-mode .progress-bar.bg-info     { background-color: #22d3ee !important; }
+        body.dark-mode .progress-bar.bg-secondary{ background-color: #94a3b8 !important; }
+        /* ---- HR divider ---- */
+        body.dark-mode hr {
+            border-color: rgba(148,163,184,.18) !important;
+            opacity: 1;
         }
         body.dark-mode .btn-outline-primary,
         body.dark-mode .btn-outline-success,

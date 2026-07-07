@@ -127,6 +127,14 @@
         body.dark-mode small.text-muted {
             color: #64748b !important;
         }
+        /* Kode booking (elemen <code>) di dark mode */
+        body.dark-mode code {
+            background-color: rgba(96,165,250,.12) !important;
+            color: #93c5fd !important;
+            border: 1px solid rgba(96,165,250,.2);
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
         body.dark-mode .btn-outline-secondary {
             color: #e2e8f0;
             border-color: rgba(148,163,184,.25);

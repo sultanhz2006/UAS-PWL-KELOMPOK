@@ -45,6 +45,35 @@
             border: 1.5px solid #E5E7EB; border-right: 0; color: #9CA3AF;
         }
         .input-group .form-control { border-radius: 0 10px 10px 0; }
+        
+        /* Tablet & Mobile Responsive */
+        @media (max-width: 991.98px) {
+            .auth-card {
+                padding: 28px 20px;
+                border-radius: 16px;
+                max-width: 100%;
+            }
+            .auth-logo { font-size: 1.3rem; }
+            .auth-subtitle { font-size: 0.8rem; }
+            .form-control, .form-label, .btn-auth, .input-group-text {
+                font-size: 0.95rem;
+            }
+            .form-control {
+                padding: 12px 12px;
+                min-height: 44px;
+            }
+            .input-group-text {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+            .btn-auth {
+                padding: 12px;
+                min-height: 44px;
+                font-size: 0.95rem;
+            }
+            .divider { margin: 16px 0; font-size: 0.75rem; }
+        }
     </style>
 </head>
 <body>

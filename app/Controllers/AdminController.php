@@ -171,6 +171,16 @@ class AdminController extends BaseController {
         $filename = 'paket_' . uniqid() . '_' . time() . '.' . $ext;
         $dest     = UPLOAD_PATH . '/' . $filename;
 
+        if (!is_dir(UPLOAD_PATH) && !mkdir(UPLOAD_PATH, 0777, true)) {
+            $this->flash('danger', 'Folder upload tidak ditemukan dan tidak bisa dibuat. Cek permission folder uploads/.');
+            return false;
+        }
+
+        if (!is_writable(UPLOAD_PATH)) {
+            $this->flash('danger', 'Folder uploads tidak dapat ditulis. Cek permission folder uploads/.');
+            return false;
+        }
+
         if (!move_uploaded_file($file['tmp_name'], $dest)) {
             $this->flash('danger', 'Gagal menyimpan file. Cek permission folder uploads/.');
             return false;
